@@ -173,14 +173,6 @@ Alternate Workflow -
 
 ### Block Diagram
 ![Block diagram](images/BlockDiagram.png)
-* _MVP Digital Bank:_
-* _Signup:_
-* _Signin:_
-* _Aadhar based OTP:_
-* _Open new account:_
-* _Lookup and inter account transfer:_
-* _Deposits and withdrawals:_
-* _Exposure of ministatement:_
 
 ### Context Diagram
 ![Context diagram](images/ContextDiagram.jpg)
