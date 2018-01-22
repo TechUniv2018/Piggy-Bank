@@ -1,5 +1,4 @@
 # Mini Digital Bank
-___
 ### Objective
 Our main aim is to develop and **MVP digital bank solution** that supports the following basic features:
 * **Aadhaar based OTP verification** for customers.
@@ -190,3 +189,10 @@ Alternate Workflow -
 4. Login![Login](images/login.jpeg)
 
 5. Profile  ![Profile](images/account.jpeg)
+
+### Database model
+1. This is a single database model that covers the basic relation between the different tables.  
+!["The dataabse model"](images/data_model_level_zero.jpg)
+
+2. This gives a deeper insight into the database model.  
+!["The dataabse model"](images/data_model_level_one.jpg)
