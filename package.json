@@ -4,7 +4,8 @@
   "description": "Mini Digital Bank",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage --notify"
+    "test": "jest",
+    "coverage": "jest --coverage --notify"
   },
   "repository": {
     "type": "git",
