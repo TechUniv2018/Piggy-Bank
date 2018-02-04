@@ -1,12 +1,12 @@
 module.exports = [
   {
-    method: 'POST',
-    path: '/route',
+    method: 'GET',
+    path: '/route/{name}',
     handler: (request, response) => {
       // implement your logic here
       response({
         statusCode: 200,
-        message: 'This is a post request to /route',
+        message: `${request.query.name} is passed in parameters.`,
       });
     },
   }];

@@ -1,35 +1,36 @@
 const Server = require('../../server');
 
 describe('Server test', () => {
-  const options = {
-    method: 'GET',
-    url: '/route',
-  };
-
-  beforeAll((done) => {
-    Server.on('start', () => {
-      done();
-    });
-  });
-
-  afterAll((done) => {
-    Server.on('stop', () => {
-      done();
-    });
-    Server.stop();
-  });
-
-  test('responds with success statusCode', (done) => {
+  test('responds with success for valid request', (done) => {
+    const options = {
+      method: 'POST',
+      url: '/route',
+    };
     Server.inject(options, (response) => {
       expect(response.statusCode).toBe(200);
       done();
     });
   });
 
-  test('response checked', (done) => {
+  test('responds for invalid path', (done) => {
+    const options = {
+      method: 'POST',
+      url: '/router',
+    };
+    Server.inject(options, (response) => {
+      expect(response.statusCode).toBe(404);
+      done();
+    });
+  });
+
+  test('response message verified', (done) => {
+    const options = {
+      method: 'POST',
+      url: '/route',
+    };
     const output = 'This is a post request to /route';
     Server.inject(options, (response) => {
-      expect(response.result).toBe(output);
+      expect(response.result.message).toBe(output);
       done();
     });
   });

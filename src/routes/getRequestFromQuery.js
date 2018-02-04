@@ -1,12 +1,12 @@
 module.exports = [
   {
-    method: 'POST',
+    method: 'GET',
     path: '/route',
     handler: (request, response) => {
       // implement your logic here
       response({
         statusCode: 200,
-        message: 'This is a post request to /route',
+        message: `${request.params.name} is passed in the url.`,
       });
     },
   }];
