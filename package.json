@@ -4,7 +4,8 @@
   "description": "Mini Digital Bank",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage --notify"
+    "test": "jest",
+    "coverage": "jest --coverage --notify"
   },
   "repository": {
     "type": "git",
@@ -23,7 +24,8 @@
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.6.1",
-    "jest": "^22.1.4"
+    "jest": "^22.1.4",
+    "nodemon": "^1.14.12"
   },
   "dependencies": {
     "hapi": "^16.6.2"
