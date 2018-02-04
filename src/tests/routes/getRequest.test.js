@@ -6,7 +6,6 @@ describe('Server test', () => {
       method: 'GET',
       url: '/route',
     };
-    console.log(options);
     Server.inject(options, (response) => {
       expect(response.statusCode).toBe(200);
       done();
@@ -18,7 +17,6 @@ describe('Server test', () => {
       method: 'GET',
       url: '/router',
     };
-    console.log(options);
     Server.inject(options, (response) => {
       expect(response.statusCode).toBe(404);
       done();
@@ -30,7 +28,6 @@ describe('Server test', () => {
       method: 'GET',
       url: '/route',
     };
-    console.log(options);
     const output = 'This is a get request to /route';
     Server.inject(options, (response) => {
       expect(response.result.message).toBe(output);

@@ -4,9 +4,8 @@ describe('Server test', () => {
   test('responds with success for valid request', (done) => {
     const options = {
       method: 'GET',
-      url: '/route/anmol',
+      url: '/routes/anmol',
     };
-    console.log(options);
     Server.inject(options, (response) => {
       expect(response.statusCode).toBe(200);
       done();
@@ -18,7 +17,6 @@ describe('Server test', () => {
       method: 'GET',
       url: '/router',
     };
-    console.log(options);
     Server.inject(options, (response) => {
       expect(response.statusCode).toBe(404);
       done();
@@ -28,10 +26,9 @@ describe('Server test', () => {
   test('response message verified', (done) => {
     const options = {
       method: 'GET',
-      url: '/route/anmol',
+      url: '/routes/anmol',
     };
-    console.log(options);
-    const output = 'anmol';
+    const output = 'anmol is passed in parameters.';
     Server.inject(options, (response) => {
       expect(response.result.message).toBe(output);
       done();

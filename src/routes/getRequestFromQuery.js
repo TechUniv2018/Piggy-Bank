@@ -1,12 +1,12 @@
 module.exports = [
   {
     method: 'GET',
-    path: '/route',
+    path: '/rout',
     handler: (request, response) => {
       // implement your logic here
       response({
         statusCode: 200,
-        message: `${request.params.name} is passed in the url.`,
+        message: `${request.query.name} is passed in the url.`,
       });
     },
   }];
