@@ -1,37 +1,26 @@
 const Server = require('../../server');
 
-describe('Server test', () => {
-  test('responds with success for valid request', (done) => {
-    const options = {
-      method: 'POST',
-      url: '/route',
-    };
-    Server.inject(options, (response) => {
-      expect(response.statusCode).toBe(200);
-      done();
-    });
-  });
-
-  test('responds for invalid path', (done) => {
-    const options = {
-      method: 'POST',
-      url: '/router',
-    };
-    Server.inject(options, (response) => {
-      expect(response.statusCode).toBe(404);
-      done();
-    });
-  });
-
-  test('response message verified', (done) => {
-    const options = {
-      method: 'POST',
-      url: '/route',
-    };
-    const output = 'This is a post request to /route';
-    Server.inject(options, (response) => {
-      expect(response.result.message).toBe(output);
-      done();
-    });
-  });
-});
+describe('Testing the hapi server for POST request',()=> {
+  test('Should return 201 status code for sucessful POST request',(done)=>{
+      const options = {
+          method:'POST',
+          url : '/users/new',
+          payload :{"userId":'akanksha',"password":'codechef'}
+      }
+      Server.inject(options, (response) => {
+          expect(response.result.statusCode).toBe(201);
+          done();
+        });
+  })
+  test('Should return correct response for successful POST request',(done)=>{
+      const options = {
+          method:'POST',
+          url : '/users/new',
+          payload :{"userId":'akanksha',"password":'codechef'}
+      }
+      Server.inject(options, (response) => {
+          expect(JSON.parse(response.payload).message).toMatch('User created')
+          done();
+        });
+  })
+})

@@ -5,8 +5,7 @@ module.exports = [
     method: 'POST',
     path: '/users/new',
     handler: (request, response) => {
-      console.log(request);
-      Models.users.create({
+      Models.Users.create({
         userId: request.payload.userId,
         password: request.payload.password,
       }).then(() => {

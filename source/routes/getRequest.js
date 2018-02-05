@@ -4,18 +4,23 @@ const Sequelize = require('sequelize');
 module.exports = [
   {
     method: 'GET',
-    path: '/{userId}/{password}',
-    handler: (request, response) => {
-      Models.users.findAll({
-        where: {
-          [Sequelize.Op.and]: [{ userId: request.params.userId }, { password: request.params.password }],
-        },
-      }).then((result) => {
-        console.log(result);
+    path: '/users/{userId}',
+  handler: (request, response) => {
+    Models.Users.findAll().then((result => result.map(row => ({
+      userId: row.userId,
+      password: row.password,
+    }))))
+      .then((users) => {
         response({
-          result,
+          data: users,
           statusCode: 200,
         });
+      })
+      .catch((error) => {
+        response({
+          data: `Error in fetching data => ${error}`,
+          statusCode: 500,
+        });
       });
-    },
-  }];
+    }
+  }]

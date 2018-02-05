@@ -15,10 +15,10 @@ describe('Server test', () => {
   test('responds for invalid path', (done) => {
     const options = {
       method: 'GET',
-      url: '/router',
+      url: '/12345',
     };
     Server.inject(options, (response) => {
-      expect(response.statusCode).toBe(404);
+      expect(response.result.statusCode).toBe(404);
       done();
     });
   });
