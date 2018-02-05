@@ -6,7 +6,7 @@ module.exports = [
     method: 'GET',
     path: '/{userId}/{password}',
     handler: (request, response) => {
-      Models.user.findAll({
+      Models.users.findAll({
         where: {
           [Sequelize.Op.and]: [{ userId: request.params.userId }, { password: request.params.password }],
         },
