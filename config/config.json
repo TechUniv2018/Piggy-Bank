@@ -1,17 +1,17 @@
 {
   "development": {
-    "username": "postgres",
-    "password": 1234,
-    "database": "postgres",
+    "username": "piggybank",
+    "password": null,
+    "database": "bankdatabase",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
-    "username": "root",
+    "username": "piggybank",
     "password": null,
-    "database": "database_test",
+    "database": "bankdatabase_test",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "postgres"
   },
   "production": {
     "username": "root",
