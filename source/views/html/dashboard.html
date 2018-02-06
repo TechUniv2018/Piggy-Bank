@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Piggy-bank</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="">Home</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li class=""><a href="">Welcome {{firstName}}!</a></li>
+      <li class=""><a href="">Logout</a></li>
+      <!--li><a href="#">Page 3</a></li-->
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+  <h3>Your money is safe with us!</h3>
+  <p class="row">
+    <div class=" col-md-3">
+      <img style="width:245px;" src="http://s3.amazonaws.com/cdn.roosterteeth.com/uploads/images/36437c1c-f403-42c3-a3a0-4886a49bd012/original/2195219-1449924847806-image-2.jpg" class="img-rounded" alt="User image">
+    </div>
+    <ul class="list-group col-md-6">
+      <li class="list-group-item">Name: {{firstName}} {{lastName}}</li>
+      <li class="list-group-item">Address: {{address}}</li>
+      <li class="list-group-item">Contact number: {{phone}}</li>
+      <li class="list-group-item">Email: {{email}}</li>
+      <li class="list-group-item">D.O.B.: {{dob}}</li>
+      <li class="list-group-item">Gender: {{gender}}</li>
+    </ul>
+  </p>
+</div>
+
+</body>
+</html>
