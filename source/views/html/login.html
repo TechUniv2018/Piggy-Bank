@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+  .imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+    position: relative;
+}
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 200px;
+    border: none;
+    cursor: pointer;
+    width: 50%;
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 35%; /* Could be more or less, depending on screen size */
+}
+button:hover {
+    opacity: 0.8;
+}
+.container {
+    padding: 35px;
+    width:100%;
+    margin: 0 22%;
+    /* transform: translateX(-25%); */
+}
+input[type=text], input[type=password], button[type=submit] {
+    width: 50%;
+    padding: 12px 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+}
+span.psw {
+    float: right;
+    padding-top: 1px;
+    width:30%;
+}
+</style>
+  
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Piggy-bank</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="">Home</a></li>
+    </ul>
+  </div>
+</nav>
+<form class="modal-content animate" action="/action_page.php">
+  <div class="imgcontainer">
+    <img src="logo.jpg" alt="Avatar" class="avatar">
+  </div>
+
+  <div class="container">
+    <label><b>Username</b></label>
+    <br>
+    <input type="text" placeholder="Enter Username" name="uname" required>
+  <br>
+    <label><b>Password</b></label>
+    <br>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+      <br><br>
+    <button type="submit">Login</button>
+    <br>
+    
+</form>
+
+</body>
+</html>
