@@ -2,7 +2,7 @@
   "name": "piggy-bank",
   "version": "1.0.0",
   "description": "Mini Digital Bank",
-  "main": "index.js",
+  "main": "./source/server.js",
   "scripts": {
     "test": "NODE_ENV=test sequelize db:migrate:undo:all &&  NODE_ENV=test sequelize db:migrate && jest",
     "start": "NODE_ENV=test sequelize db:migrate &&  && NODE_ENV=test db:seed:all && node ./source/server.js"
@@ -28,9 +28,11 @@
     "nodemon": "^1.14.12"
   },
   "dependencies": {
+    "handlebars": "^4.0.11",
     "hapi": "^16.6.2",
     "pg": "^7.4.1",
     "sequelize": "^4.32.6",
-    "sequelize-cli": "^3.2.0"
+    "sequelize-cli": "^3.2.0",
+    "vision": "^4.1.1"
   }
 }
