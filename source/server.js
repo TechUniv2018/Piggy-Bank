@@ -19,7 +19,7 @@ server.register(Vision, (err) => {
   if (err) throw err;
 });
 
-server.views({ engines: { html: handle }, path: '../views/html' });
+server.views({ engines: { html: handle }, path: 'source/views/html/', isCached: false });
 
 server.route(routes);
 
