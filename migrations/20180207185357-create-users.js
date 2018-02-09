@@ -1,5 +1,3 @@
-
-
 module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.createTable('users', {
     id: {
@@ -9,51 +7,69 @@ module.exports = {
       type: Sequelize.INTEGER,
     },
     user_name: {
-      type: Sequelize.STRING,
       allowNull: false,
       validate: {
         notEmpty: true,
         len: [1, 50],
       },
+      type: Sequelize.STRING,
     },
     password_digest: {
+      validate: {
+        notEmpty: true,
+      },
+      type: Sequelize.STRING,
+    },
+    user_firstname: {
       type: Sequelize.STRING,
       validate: {
         notEmpty: true,
       },
     },
-    // password_confirmation: {
-    //   type: Sequelize.VIRTUAL,
-
-    // },
-    user_email: {
+    user_lastname: {
       type: Sequelize.STRING,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    user_address: {
+      type: Sequelize.STRING,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    user_phone: {
+      type: Sequelize.STRING,
+      validate: {
+        notEmpty: true,
+        len: 10,
+      },
+    },
+    user_email: {
       allowNull: false,
       validate: {
-        isEmail: true,
         notEmpty: true,
         len: [1, 255],
       },
+      type: Sequelize.STRING,
     },
     user_dob: {
-      type: Sequelize.DATEONLY,
       validate: {
         notEmpty: true,
       },
-
+      type: Sequelize.DATE,
     },
     user_gender: {
-      type: Sequelize.STRING,
       validate: {
         notEmpty: true,
       },
-
+      type: Sequelize.STRING,
     },
     user_pan: {
-      type: Sequelize.STRING,
       validate: {
         notEmpty: true,
       },
+      type: Sequelize.STRING,
     },
     user_pic: {
       type: Sequelize.STRING,
