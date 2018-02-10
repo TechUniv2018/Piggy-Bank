@@ -21,4 +21,8 @@ describe('Testing validation helper function', () => {
     const data = { userName: '1abgfmdjn', password: 'hello98765' };
     expect(validation(data)).toMatch('invalid');
   });
+  test('Validation failed for userName starting with number', () => {
+    const data = { userName: '1abg&fmdjn', password: 'hello98765' };
+    expect(validation(data)).toMatch('invalid');
+  });
 });
