@@ -49,4 +49,8 @@ describe('Testing validation helper function', () => {
     const data = { userName: '1abg_fmsd', password: 'HELLOkghfwefs' };
     expect(validation(data)).toMatch('invalid');
   });
+  test('Validation passed for correct username and password format', () => {
+    const data = { userName: '1abg_fmsd', password: 'HELLOkghfwefs_^' };
+    expect(validation(data)).toMatch('valid');
+  });
 });
