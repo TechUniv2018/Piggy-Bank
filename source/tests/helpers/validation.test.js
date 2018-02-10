@@ -21,8 +21,32 @@ describe('Testing validation helper function', () => {
     const data = { userName: '1abgfmdjn', password: 'hello98765' };
     expect(validation(data)).toMatch('invalid');
   });
-  test('Validation failed for userName starting with number', () => {
+  test('Validation failed for userName containing any other special character than _', () => {
     const data = { userName: '1abg&fmdjn', password: 'hello98765' };
+    expect(validation(data)).toMatch('invalid');
+  });
+  test('Validation passed for userName containing _ character', () => {
+    const data = { userName: '1abg_fmdjn', password: 'hello98765' };
+    expect(validation(data)).toMatch('valid');
+  });
+  test('Validation failed for password starting with number', () => {
+    const data = { userName: '1abg_fmdjn', password: '1hello9876' };
+    expect(validation(data)).toMatch('invalid');
+  });
+  test('Validation failed for password not containg atleast one capital letter', () => {
+    const data = { userName: '1abg_fmsd', password: 'hello9876&' };
+    expect(validation(data)).toMatch('invalid');
+  });
+  test('Validation failed for password not containg atleast one small letter', () => {
+    const data = { userName: '1abg_fmsd', password: 'HELLO9876&' };
+    expect(validation(data)).toMatch('invalid');
+  });
+  test('Validation failed for password not containg atleast one special character', () => {
+    const data = { userName: '1abg_fmsd', password: 'HELLO9876s' };
+    expect(validation(data)).toMatch('invalid');
+  });
+  test('Validation failed for password not containg atleast one digit', () => {
+    const data = { userName: '1abg_fmsd', password: 'HELLOkghfwefs' };
     expect(validation(data)).toMatch('invalid');
   });
 });
