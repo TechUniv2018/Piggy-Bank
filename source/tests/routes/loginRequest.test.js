@@ -16,7 +16,7 @@ describe('Testing the login functionality', () => {
     const options = {
       method: 'POST',
       url: '/login',
-      payload: { userName: 'Jdfgfsfas', password: 'codechefD$hjfgdgsd' },
+      payload: { userName: 'Jdfgfsfas', password: 'codechefD1' },
     };
     Server.inject(options, (response) => {
       expect(response.result.message).toBe('Authentication failed');
