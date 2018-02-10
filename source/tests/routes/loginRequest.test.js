@@ -45,4 +45,15 @@ describe('Testing the login functionality', () => {
       done();
     });
   });
+  test('Authentication done for correct login credentials', (done) => {
+    const options = {
+      method: 'POST',
+      url: '/login',
+      payload: { userName: 'John_1234', password: 'wearebest2D%' },
+    };
+    Server.inject(options, (response) => {
+      expect(response.result.message).toBe('User Authenticated');
+      done();
+    });
+  });
 });

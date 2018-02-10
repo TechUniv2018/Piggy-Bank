@@ -13,14 +13,11 @@ module.exports = [
       if (validation({ userName, password }) === 'invalid') {
         response({ message: 'Authentication failed[Invalid format]', statusCode: 400 });
       } else {
-        console.log('hello');
         Models.bankusers.findOne({ where: { userName } }).then((userData) => {
-          console.log(userData);
           if (userData === null || userData === undefined) { response({ message: 'Authentication failed[UserName invalid]' }); }
           if ('dataValues' in userData && 'password' in userData.dataValues) {
             const passwordDigest = userData.dataValues.password;
             verifyPassword(password, passwordDigest).then((flag) => {
-              console.log(flag);
               if (flag === false) {
                 response({ message: 'Authentication failed[Incorrect password]' });
               } else { response({ message: 'User Authenticated' }); }
