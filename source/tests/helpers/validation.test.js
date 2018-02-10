@@ -53,4 +53,8 @@ describe('Testing validation helper function', () => {
     const data = { userName: '1abg_fmsd', password: 'HELLOkghfwefs_^' };
     expect(validation(data)).toMatch('valid');
   });
+  test('Validation failed for password containing any special character other than !,@,#,$,%,^,&,*', () => {
+    const data = { userName: '1abg_fmsd', password: 'HELLOkghfwefs_~' };
+    expect(validation(data)).toMatch('invalid');
+  });
 });
