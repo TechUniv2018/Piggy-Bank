@@ -10,11 +10,15 @@ describe('Testing validation helper function', () => {
     expect(validation(data)).toMatch('invalid');
   });
   test('Validation failed for password less than 6 characters', () => {
-    const data = { userName: 'wearebest', password: 'hello' };
+    const data = { userName: 'wearebesd', password: 'hello' };
     expect(validation(data)).toMatch('invalid');
   });
   test('Validation failed for password more than 20 characters', () => {
     const data = { userName: 'abgfmdjn', password: 'hello9876543212345678765432fgdfgfsd' };
+    expect(validation(data)).toMatch('invalid');
+  });
+  test('Validation failed for userName starting with number', () => {
+    const data = { userName: '1abgfmdjn', password: 'hello98765' };
     expect(validation(data)).toMatch('invalid');
   });
 });
