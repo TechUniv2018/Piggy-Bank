@@ -27,19 +27,7 @@ describe('Testing the login functionality', () => {
     const options = {
       method: 'POST',
       url: '/login',
-      payload: { userName: 'Surabhi123', password: 'helloIamAwesome!2' },
-    };
-    Server.inject(options, (response) => {
-      expect(response.result.message).toBe('Authentication failed');
-      done();
-    });
-  });
-
-  test('Authentication failed incorrect password', (done) => {
-    const options = {
-      method: 'POST',
-      url: '/login',
-      payload: { userName: 'John_1234', password: 'helloIamAwesome!2' },
+      payload: { userName: 'Surabhi123', password: 'wearebest2D%' },
     };
     Server.inject(options, (response) => {
       expect(response.result.message).toBe('Authentication failed');
