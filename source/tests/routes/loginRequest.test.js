@@ -23,4 +23,15 @@ describe('Testing the login functionality', () => {
       done();
     });
   });
+  test('Authentication failed username not present in database', (done) => {
+    const options = {
+      method: 'POST',
+      url: '/login',
+      payload: { userName: 'Surabhi123', password: 'helloIamAwesome!2' },
+    };
+    Server.inject(options, (response) => {
+      expect(response.result.message).toBe('Authentication failed');
+      done();
+    });
+  });
 });

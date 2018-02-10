@@ -11,6 +11,18 @@ module.exports = [
       const password = request.payload.password;
       if (validation({ userName, password }) === 'invalid') {
         response({ message: 'Authentication failed', statusCode: 400 });
+      } else {
+        Models.users.findOne({ where: { user_name: userName } }).then((userData) => {
+          if (userData === null || userData === undefined) { response({ message: 'Authentication failed' }); }
+          if ('dataValues' in userData && 'password' in userData.dataValues) {
+            const passwordDigest = userData.dataValues.password;
+            verifyPassword(password, passwordDigest).then((flag) => {
+              if (flag === false) {
+                response({ message: 'Authentication failed' });
+              } else { response({ message: 'User Authenticated' }); }
+            });
+          }
+        });
       }
     },
   },
