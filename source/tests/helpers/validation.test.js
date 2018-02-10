@@ -5,4 +5,8 @@ describe('Testing validation helper function', () => {
     const data = { userName: 'ab', password: 'hello' };
     expect(validation(data)).toMatch('invalid');
   });
+  test('Validation failed for userName more than 15 characters', () => {
+    const data = { userName: 'abgfmdjnhgjnfkmdsfghjhgf', password: 'hello' };
+    expect(validation(data)).toMatch('invalid');
+  });
 });
