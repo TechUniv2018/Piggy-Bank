@@ -1,4 +1,3 @@
-const generateHash = require('../../helpers/generateHash');
 const verifypassword = require('../../helpers/verifyPassword');
 const bcrypt = require('bcrypt');
 

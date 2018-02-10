@@ -3,7 +3,7 @@
 module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.bulkInsert('bankusers', [{
     userName: 'John_1234',
-    password: '$2a$10$ozeZZxOXWGSNw/OQUKG3sev5PdsydBPPa7R/RO9xyMyNg7eMOA2Ze', // codechefD12$
+    password: '$2a$10$uBqWq2mNznlnCisaC.i3UOahjcC9I4CYWy3gGr2w5/oCGCVur0wOm', // wearebest2D%
     firstName: 'John',
     lastName: 'Doe',
     phoneNumber: 8475375640,
@@ -18,7 +18,7 @@ module.exports = {
   },
   {
     userName: 'Suzan_best',
-    password: '$2a$10$/j7jKBZGeP07YlYMmLPDSe5DzvCYu2xO5uRfhuByTb1SqfBeF/2Im', // leetcodeP23*
+    password: '$2a$10$HpuHX/R2Y1fIv/IeVFNFS.fX/KpZ8h2wRFKeJ8QbCN.x1tNddU4HO', // hacker2A*we
     firstName: 'Suzan',
     lastName: 'Lopez',
     phoneNumber: 8475372330,

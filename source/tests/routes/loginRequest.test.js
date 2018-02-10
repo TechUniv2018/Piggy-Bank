@@ -8,7 +8,7 @@ describe('Testing the login functionality', () => {
       payload: { userName: 'J', password: 'codechefD12$hjfgdgsd' },
     };
     Server.inject(options, (response) => {
-      expect(response.result.message).toBe('Authentication failed');
+      expect(response.result.message).toBe('Authentication failed[Invalid format]');
       done();
     });
   });
@@ -19,7 +19,7 @@ describe('Testing the login functionality', () => {
       payload: { userName: 'Jdfgfsfas', password: 'codechefD1' },
     };
     Server.inject(options, (response) => {
-      expect(response.result.message).toBe('Authentication failed');
+      expect(response.result.message).toBe('Authentication failed[Invalid format]');
       done();
     });
   });
@@ -30,7 +30,18 @@ describe('Testing the login functionality', () => {
       payload: { userName: 'Surabhi123', password: 'wearebest2D%' },
     };
     Server.inject(options, (response) => {
-      expect(response.result.message).toBe('Authentication failed');
+      expect(response.result.message).toBe('Authentication failed[UserName invalid]');
+      done();
+    });
+  });
+  test('Authentication failed incorrect password', (done) => {
+    const options = {
+      method: 'POST',
+      url: '/login',
+      payload: { userName: 'John_1234', password: 'wearebest2F%' },
+    };
+    Server.inject(options, (response) => {
+      expect(response.result.message).toBe('Authentication failed[Incorrect password]');
       done();
     });
   });
