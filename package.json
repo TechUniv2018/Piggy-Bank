@@ -4,7 +4,7 @@
   "description": "Mini Digital Bank",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test sequelize db:migrate:undo:all &&  NODE_ENV=test sequelize db:migrate && jest source/tests/helpers/validation.test.js",
+    "test": "NODE_ENV=test sequelize db:migrate:undo:all &&  NODE_ENV=test sequelize db:migrate && jest source/tests/routes/loginRequest.test.js",
     "start": "NODE_ENV=test sequelize db:migrate &&  && NODE_ENV=test db:seed:all && node ./source/server.js"
   },
   "repository": {
@@ -28,6 +28,7 @@
     "nodemon": "^1.14.12"
   },
   "dependencies": {
+    "bcrypt": "^1.0.3",
     "hapi": "^16.6.2",
     "joi": "^13.1.2",
     "pg": "^7.4.1",
