@@ -2,14 +2,14 @@
   "development": {
     "username": "postgres",
     "password": "mckinsey+167458",
-    "database": "bankdatabase_test",
+    "database": "bankdb_test",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
     "username": "postgres",
     "password": "mckinsey+167458",
-    "database": "bankdatabase_test",
+    "database": "bankdb_test",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
