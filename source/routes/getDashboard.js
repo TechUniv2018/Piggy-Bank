@@ -8,12 +8,12 @@ module.exports = [
     handler: (request, response) => {
       Models.users.findOne({ where: { user_name: request.query.username } })
         .then((result) => {
-          let resultObject;
           if (result === null) {
-            resultObject = { message: 'No such user exsists' };
+            const resultObject = { message: 'No such user exists' };
+            response(resultObject);
           } else {
             const dob = strftime('%F', new Date(result.user_dob));
-            resultObject = {
+            const resultObject = {
               firstName: result.user_firstname,
               lastName: result.user_lastname,
               address: result.user_address,
@@ -25,8 +25,8 @@ module.exports = [
               pan: result.user_pan,
               img_src: result.user_pic,
             };
+            response.view('dashboard', resultObject);
           }
-          response.view('dashboard', resultObject);
         }).catch((err) => {
           response(`${err.message}`);
         });
