@@ -6,7 +6,7 @@ module.exports = [
       // implement your logic here
       response({
         statusCode: 200,
-        message: `${request.query.name} is passed in the url.`,
+        message: `${request.query.name} is a good boy.`,
       });
     },
   }];
