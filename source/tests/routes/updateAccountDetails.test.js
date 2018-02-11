@@ -15,4 +15,14 @@ describe('Server test', () => {
       done();
     });
   });
+  test('responds for invalid path', (done) => {
+    const options = {
+      method: 'GET',
+      url: '/12345',
+    };
+    Server.inject(options, (response) => {
+      expect(response.result.statusCode).toBe(404);
+      done();
+    });
+  });
 });
