@@ -3,7 +3,7 @@ const Models = require('../../../models');
 
 describe('Testing the hapi server for GET request', () => {
   beforeEach((done) => {
-    Models.users.create({
+    Models.bankusers.create({
       user_name: 'anmol5varma',
       password_digest: '$2a$10$ozeZZxOXWGSNw/OQUKG3sev5PdsydBPPa7R/RO9xyMyNg7eMOA2Ze', // codechefD12$
       user_firstname: 'Anmol',
@@ -23,7 +23,7 @@ describe('Testing the hapi server for GET request', () => {
     });
   });
   afterEach((done) => {
-    Models.users.destroy({
+    Models.bankusers.destroy({
       where: {},
       truncate: true,
     }).then((result) => {
