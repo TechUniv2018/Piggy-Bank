@@ -4,18 +4,18 @@ const Models = require('../../../models');
 describe('Testing the hapi server for GET request', () => {
   beforeEach((done) => {
     Models.bankusers.create({
-      user_name: 'anmol5varma',
+      userName: 'anmol5varma',
       password_digest: '$2a$10$ozeZZxOXWGSNw/OQUKG3sev5PdsydBPPa7R/RO9xyMyNg7eMOA2Ze', // codechefD12$
-      user_firstname: 'Anmol',
-      user_lastname: 'Varma',
-      user_address: 'McKinsey Digital labs',
-      user_phone: 8098469331,
-      user_email: 'anmol5varma@gmail.com',
-      user_dob: new Date(1996, 10, 26),
-      user_gender: 'Male',
-      user_pan: 'ABCDE1234F',
-      user_pic: 'logo.jpg',
-      user_fathername: 'Varma ji',
+      firstName: 'Anmol',
+      lastName: 'Varma',
+      // address: 'McKinsey Digital labs',
+      phoneNumber: 8098469331,
+      email: 'anmol5varma@gmail.com',
+      dob: new Date(1996, 10, 26),
+      gender: 'Male',
+      pan: 'ABCDE1234F',
+      pic: 'logo.jpg',
+      fathername: 'Varma ji',
       createdAt: new Date(),
       updatedAt: new Date(),
     }).then((result) => {
@@ -33,7 +33,7 @@ describe('Testing the hapi server for GET request', () => {
   test('Should return 200 status code for sucessful GET request', (done) => {
     const options = {
       method: 'GET',
-      url: '/dashboard?username=John',
+      url: '/dashboard?username=anmol5varma',
     };
     Server.inject(options, (response) => {
       expect(response.statusCode).toBe(200);

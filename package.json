@@ -28,9 +28,10 @@
     "nodemon": "^1.14.12"
   },
   "dependencies": {
-    "handlebars": "^4.0.11",
     "bcrypt": "^1.0.3",
+    "handlebars": "^4.0.11",
     "hapi": "^16.6.2",
+    "inert": "^5.1.0",
     "joi": "^13.1.2",
     "pg": "^7.4.1",
     "sequelize": "^4.32.6",
