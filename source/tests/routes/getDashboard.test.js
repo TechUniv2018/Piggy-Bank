@@ -5,30 +5,29 @@ describe('Testing the hapi server for GET request', () => {
   beforeEach((done) => {
     Models.bankusers.create({
       userName: 'anmol5varma',
-      password_digest: '$2a$10$ozeZZxOXWGSNw/OQUKG3sev5PdsydBPPa7R/RO9xyMyNg7eMOA2Ze', // codechefD12$
+      password: '$2a$10$uBqWq2mNznlnCisaC.i3UOahjcC9I4CYWy3gGr2w5/oCGCVur0wOm', // wearebest2D%
       firstName: 'Anmol',
       lastName: 'Varma',
-      // address: 'McKinsey Digital labs',
-      phoneNumber: 8098469331,
+      phoneNumber: 8475375640,
       email: 'anmol5varma@gmail.com',
       dob: new Date(1996, 10, 26),
       gender: 'Male',
-      pan: 'ABCDE1234F',
-      pic: 'logo.jpg',
-      fathername: 'Varma ji',
+      panCardNumber: 'ABCDE1234F',
+      user_pic: '',
+      fatherName: 'Varma ji',
       createdAt: new Date(),
       updatedAt: new Date(),
-    }).then((result) => {
+    }).then(() => {
       done();
-    });
+    }).catch();
   });
   afterEach((done) => {
     Models.bankusers.destroy({
-      where: {},
+      where: { userName: 'anmol5varma' },
       truncate: true,
-    }).then((result) => {
+    }).then(() => {
       done();
-    });
+    }).catch();
   });
   test('Should return 200 status code for sucessful GET request', (done) => {
     const options = {
