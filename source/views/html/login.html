@@ -50,7 +50,7 @@ span.psw {
     width:30%;
 }
 </style>
-  
+
 </head>
 <body>
 
@@ -64,23 +64,23 @@ span.psw {
     </ul>
   </div>
 </nav>
-<form class="modal-content animate" action="/action_page.php">
+<form class="modal-content animate" method="POST" action="http://localhost:8080/login">
   <div class="imgcontainer">
-    <img src="logo.jpg" alt="Avatar" class="avatar">
+    <img src="source/logo.jpg" alt="Avatar" class="avatar">
   </div>
 
   <div class="container">
     <label><b>Username</b></label>
     <br>
-    <input type="text" placeholder="Enter Username" name="uname" required>
+    <input type="text" placeholder="Enter Username" name="userName" required>
   <br>
     <label><b>Password</b></label>
     <br>
-    <input type="password" placeholder="Enter Password" name="psw" required>
+    <input type="password" placeholder="Enter Password" name="password" required>
       <br><br>
     <button type="submit">Login</button>
     <br>
-    
+
 </form>
 
 </body>
