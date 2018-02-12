@@ -16,9 +16,15 @@ module.exports = [module.exports = {
     }).then((data) => {
       verifyPassword(request.payload.password, data.password).then((res) => {
         if (res) {
-          // check if new password in correct format
-          // check if password entered twice correctly
-          // update password
+          if (validation({ userName: request.payload.userName, password: request.payload.password1 }) === 'valid') {
+            // check if password entered twice correctly
+            // update password
+          } else {
+            response({
+              statusCode: 422,
+              message: 'Incorrect password format',
+            });
+          }
         } else {
           response({
             statusCode: 422,
