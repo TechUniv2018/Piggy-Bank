@@ -32,7 +32,7 @@ describe('Testing the hapi server for GET request', () => {
       url: '/users/surabhi123',
     };
     Server.inject(options, (response) => {
-      expect(JSON.parse(response.payload).data[0].password).toMatch('pokji324');
+      expect(JSON.parse(response.payload).data[0].password).toMatch('codechef');
       done();
     });
   });
