@@ -17,8 +17,14 @@ module.exports = [module.exports = {
       verifyPassword(request.payload.password, data.password).then((res) => {
         if (res) {
           if (validation({ userName: request.payload.userName, password: request.payload.password1 }) === 'valid') {
-            // check if password entered twice correctly
-            // update password
+            if (request.payload.password1 === request.payload.password2) {
+              // update password
+            } else {
+              response({
+                statusCode: 422,
+                message: 'Passwords do not match',
+              });
+            }
           } else {
             response({
               statusCode: 422,

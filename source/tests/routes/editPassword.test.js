@@ -25,5 +25,18 @@ describe('Testing edit Password', () => {
       done();
     });
   });
+  test('Responds with message for new passwords that do not match', (done) => {
+    const options = {
+      method: 'POST',
+      url: '/users/John_1234/password',
+      payload: {
+        userName: 'John_1234', password: 'wearebest2D%', password1: 'wearebest4D%', password2: 'wearebest3D%',
+      },
+    };
+    server.inject(options, (response) => {
+      expect(response.result.message).toBe('Passwords do not match');
+      done();
+    });
+  });
 });
 
