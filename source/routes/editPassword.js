@@ -18,7 +18,23 @@ module.exports = [module.exports = {
         if (res) {
           if (validation({ userName: request.payload.userName, password: request.payload.password1 }) === 'valid') {
             if (request.payload.password1 === request.payload.password2) {
-              // update password
+              generateHash(request.payload.password1, 1).then((hash) => {
+                models.bankusers.update(
+                  {
+                    password: hash,
+                  },
+                  {
+                    where: {
+                      userName: request.payload.userName,
+                    },
+                  },
+                ).then((result) => {
+                  response({
+                    statusCode: 201,
+                    message: 'Password updated successfully',
+                  });
+                });
+              });
             } else {
               response({
                 statusCode: 422,

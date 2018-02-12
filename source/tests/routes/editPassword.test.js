@@ -38,5 +38,18 @@ describe('Testing edit Password', () => {
       done();
     });
   });
+  test('Responds with message for updated password', (done) => {
+    const options = {
+      method: 'POST',
+      url: '/users/John_1234/password',
+      payload: {
+        userName: 'John_1234', password: 'wearebest2D%', password1: 'wearebest3D%', password2: 'wearebest3D%',
+      },
+    };
+    server.inject(options, (response) => {
+      expect(response.result.message).toBe('Password updated successfully');
+      done();
+    });
+  });
 });
 

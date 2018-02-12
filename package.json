@@ -4,7 +4,7 @@
   "description": "Mini Digital Bank",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test sequelize db:migrate:undo:all &&  NODE_ENV=test sequelize db:migrate && NODE_ENV=test sequelize db:seed:all &&  jest source/tests/routes/editPassword.test.js",
+    "test": "NODE_ENV=test sequelize db:migrate:undo:all &&  NODE_ENV=test sequelize db:migrate && NODE_ENV=test sequelize db:seed:all &&  jest",
     "start": "node source/server.js"
   },
   "repository": {
