@@ -8,7 +8,8 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}/source/routes/updateAccountDetails.js"
+            "program": "${workspaceFolder}/source/server.js",
+            // "env": {"NODE_ENV": "test"}
         }
     ]
 }
