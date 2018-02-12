@@ -19,11 +19,12 @@ module.exports = [
           userName: username,
         },
       }).then(() => {
-        response('Details Changed').code(201);
-        // response({
-        //   statusCode: 201,
-        //   message: 'Details Changed',
-        // });
+        // response('Details Changed').code(201);
+        console.log('Inside');
+        response({
+          statusCode: 201,
+          message: 'Details Changed',
+        });
       }).catch(() => {
         response('Paridhi');
       });
