@@ -8,6 +8,22 @@ module.exports = [
       const updateObject = request.payload;
       const username = request.payload.userName;
       delete updateObject.userName;
+      console.log(request.payload);
+      const propNames = Object.getOwnPropertyNames(updateObject);
+      for (let i = 0; i < propNames.length; i += 1) {
+        const propName = propNames[i];
+        if (updateObject[propName] === null || updateObject[propName] === undefined || updateObject[propName] === '') {
+          delete updateObject[propName];
+        }
+      }
+      // console.log(updateObject);
+      // for (key in updateObject) {
+      //   console.log(updateObject[key], key);
+      //   if (updateObject[key] === null || updateObject[key] === '') {
+      //     delete updateObject[key];
+      //   }
+      // }
+      console.log(updateObject);
       Models.bankusers.update(updateObject, {
         where: {
           userName: username,
@@ -19,8 +35,11 @@ module.exports = [
           statusCode: 201,
           message: 'Details Changed',
         });
-      }).catch(() => {
-        response('Paridhi');
+      }).catch((error) => {
+        response({
+          data: `Error in fetching data => ${error}`,
+          statusCode: 500,
+        });
       });
     },
   }];
