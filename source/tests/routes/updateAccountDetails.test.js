@@ -54,7 +54,7 @@ describe('Server test', () => {
       done();
     });
   });
-  test('Check for Null cases', (done) => {
+  test('Check for undefined cases', (done) => {
     const options = {
       method: 'PUT',
       url: '/users/update',
@@ -63,6 +63,24 @@ describe('Server test', () => {
         email: undefined,
         firstName: 'paridhiMohindra',
         lastName: undefined,
+        phone: '9035191084',
+      },
+    };
+    Server.inject(options, (response) => {
+      expect(response.result.message).toBe('Details Changed');
+      done();
+    });
+  });
+  test('Check When no value is passed in the field', (done) => {
+    const options = {
+      method: 'PUT',
+      url: '/users/update',
+      payload: {
+        userName: 'paridhi',
+        email: 'paridhi_mohindra@mckinsey.com',
+        firstName: 'paridhi',
+        lastName: 'mohindra',
+        phone: '',
       },
     };
     Server.inject(options, (response) => {
