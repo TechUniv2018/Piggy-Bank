@@ -1,4 +1,6 @@
 const Server = require('../../server');
+const Models = require('../../../models');
+
 
 describe('Server test', () => {
   test('Responds with success for valid request', (done) => {
@@ -85,6 +87,23 @@ describe('Server test', () => {
     };
     Server.inject(options, (response) => {
       expect(response.result.message).toBe('Details Changed');
+      done();
+    });
+  });
+  test('Check If it updates a row in the database', (done) => {
+    const options = {
+      method: 'PUT',
+      url: '/users/update',
+      payload: {
+        userName: 'John_1234',
+        email: 'paridhi_mohindra@mckinsey.com',
+        firstName: 'paridhi',
+        lastName: 'mohindra',
+        phone: '8092298179',
+      },
+    };
+    Server.inject(options, (response) => {
+      expect(response.result.updateFlag).toEqual([1]);
       done();
     });
   });

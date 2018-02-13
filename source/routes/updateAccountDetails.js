@@ -23,16 +23,17 @@ module.exports = [
       //     delete updateObject[key];
       //   }
       // }
-      console.log(updateObject);
+      // console.log(updateObject);
       Models.bankusers.update(updateObject, {
         where: {
           userName: username,
         },
       }).then((result) => {
-        console.log(result);
+        // console.log(result);
         // response('Details Changed').code(201);
         response({
           statusCode: 201,
+          updateFlag: result,
           message: 'Details Changed',
         });
       }).catch((error) => {
