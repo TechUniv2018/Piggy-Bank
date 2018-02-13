@@ -39,4 +39,35 @@ describe('Server test', () => {
       done();
     });
   });
+  test('Check for Null cases', (done) => {
+    const options = {
+      method: 'PUT',
+      url: '/users/update',
+      payload: {
+        userName: 'pari',
+        email: 'pari@gmail.com',
+        firstName: null,
+      },
+    };
+    Server.inject(options, (response) => {
+      expect(response.result.message).toBe('Details Changed');
+      done();
+    });
+  });
+  test('Check for Null cases', (done) => {
+    const options = {
+      method: 'PUT',
+      url: '/users/update',
+      payload: {
+        userName: 'paridhi',
+        email: undefined,
+        firstName: 'paridhiMohindra',
+        lastName: undefined,
+      },
+    };
+    Server.inject(options, (response) => {
+      expect(response.result.message).toBe('Details Changed');
+      done();
+    });
+  });
 });
