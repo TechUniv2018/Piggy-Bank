@@ -16,9 +16,9 @@ module.exports = [module.exports = {
     }).then((data) => {
       verifyPassword(request.payload.password, data.password).then((res) => {
         if (res) {
-          if (validation({ userName: request.payload.userName, password: request.payload.password1 }) === 'valid') {
+          if (validation({ username: request.payload.userName, userPassword: request.payload.password1 }) === 'valid') {
             if (request.payload.password1 === request.payload.password2) {
-              generateHash(request.payload.password1, 1).then((hash) => {
+              generateHash(request.payload.password1, 10).then((hash) => {
                 models.bankusers.update(
                   {
                     password: hash,
