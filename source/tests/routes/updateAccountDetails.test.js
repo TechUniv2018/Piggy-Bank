@@ -1,5 +1,4 @@
 const Server = require('../../server');
-const Models = require('../../../models');
 
 
 describe('Server test', () => {
