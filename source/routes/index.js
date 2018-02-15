@@ -11,5 +11,5 @@ const editPassword = require('./editPassword');
 module.exports = [].concat(
   getRequest, postRequest, getReqQuery,
   getReqValue, loginRequest, updateAccountDetails,
-  showLogin, editPassword,
+  showLogin, editPassword, moveToDashbboard,
 );
