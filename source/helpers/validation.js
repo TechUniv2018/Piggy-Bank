@@ -1,5 +1,5 @@
 const Joi = require('joi');
-
+//
 const schema = {
   username: Joi.string().min(5).max(15).regex(/^[a-z][a-z0-9_]*$/i),
   /*
@@ -8,7 +8,7 @@ const schema = {
     2.Contains atleast one digit, one capital,one special character [Order should be same]
     3.Contain any word character
   */
-  userPassword: Joi.string().min(6).max(20).regex(/^[a-zA-Z][a-zA-Z0-9_]*[0-9][a-zA-Z0-9_]*[A-Z][a-zA-Z0-9]*[%$^&*#@][a-zA-Z0-9_]*$/),
+  userPassword: Joi.string().regex(/^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z])(?=.*[a-z])[a-zA-Z0-9!@#$%^&*]{6,16}$/),
 };
 
 const validation = (data, config) => {
