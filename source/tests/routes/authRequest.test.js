@@ -23,7 +23,7 @@ describe('Testing the hapi server for GET request', () => {
 
   afterEach((done) => {
     Models.user_authenticates.destroy({
-      where: { userid: 'anmolvarma' },
+      where: { userid: 'anmolvarma' || 'anmvarma' },
       truncate: true,
     }).then(() => {
       done();

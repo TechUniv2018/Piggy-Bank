@@ -37,6 +37,20 @@ describe('Testing the hapi server for DELETE request', () => {
       done();
     });
   });
+  test('Verify a user', (done) => {
+    const options = {
+      method: 'DELETE',
+      url: '/auth',
+      headers: {
+        user: 'anmolvarma',
+        token: '1234',
+      },
+    };
+    Server.inject(options, (response) => {
+      expect(response.result.statusCode).toBe(200);
+      done();
+    });
+  });
 
   test('Verify a user', (done) => {
     const options = {
@@ -49,6 +63,20 @@ describe('Testing the hapi server for DELETE request', () => {
     };
     Server.inject(options, (response) => {
       expect(response.result.message).toBe('Invalid request');
+      done();
+    });
+  });
+  test('Verify a user', (done) => {
+    const options = {
+      method: 'DELETE',
+      url: '/auth',
+      headers: {
+        user: 'anmolvarma',
+        token: '122131234',
+      },
+    };
+    Server.inject(options, (response) => {
+      expect(response.result.statusCode).toBe(401);
       done();
     });
   });
