@@ -5,12 +5,10 @@ const generateHash = require('../helpers/generateHash');
 
 module.exports = [module.exports = {
   method: 'POST',
-  path: '/users/{userName}/password',
+  path: '/users/password',
   handler: (request, response) => {
-    // Authenticaltion stuff
     models.bankusers.findOne({
       where: {
-        // get username from session
         userName: request.payload.userName,
       },
     }).then((data) => {
@@ -28,7 +26,7 @@ module.exports = [module.exports = {
                       userName: request.payload.userName,
                     },
                   },
-                ).then((result) => {
+                ).then(() => {
                   response({
                     statusCode: 201,
                     message: 'Password updated successfully',

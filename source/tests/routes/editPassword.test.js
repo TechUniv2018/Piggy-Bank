@@ -33,7 +33,7 @@ describe('Testing edit Password', () => {
   test('Responds with message for invalid password', (done) => {
     const options = {
       method: 'POST',
-      url: '/users/John_1234/password',
+      url: '/users/password',
       payload: { userName: 'paridhi', password: 'WrongPassword' },
     };
     server.inject(options, (response) => {
@@ -44,7 +44,7 @@ describe('Testing edit Password', () => {
   test('Responds with message for invalid new password format', (done) => {
     const options = {
       method: 'POST',
-      url: '/users/John_1234/password',
+      url: '/users/password',
       payload: {
         userName: 'paridhi', password: 'wearebest2D%', password1: 'wrong format', password2: 'wearebest2D%',
       },
@@ -57,7 +57,7 @@ describe('Testing edit Password', () => {
   test('Responds with message for new passwords that do not match', (done) => {
     const options = {
       method: 'POST',
-      url: '/users/John_1234/password',
+      url: '/users/password',
       payload: {
         userName: 'paridhi', password: 'wearebest2D%', password1: 'wearebest4D%', password2: 'wearebest3D%',
       },
@@ -70,7 +70,7 @@ describe('Testing edit Password', () => {
   test('Responds with message for updated password', (done) => {
     const options = {
       method: 'POST',
-      url: '/users/John_1234/password',
+      url: '/users/password',
       payload: {
         userName: 'paridhi', password: 'wearebest2D%', password1: 'wearebest3D%', password2: 'wearebest3D%',
       },

@@ -7,7 +7,7 @@ const loginRequest = require('./loginRequest');
 const updateAccountDetails = require('./updateAccountDetails');
 const showLogin = require('./getLogin');
 const editPassword = require('./editPassword');
-// require all the request files and export them in an array
+
 module.exports = [].concat(
   getRequest, postRequest, getReqQuery,
   getReqValue, loginRequest, updateAccountDetails,
