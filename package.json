@@ -2,9 +2,10 @@
   "name": "piggy-bank",
   "version": "1.0.0",
   "description": "Mini Digital Bank",
-  "main": "index.js",
+  "main": "./source/server.js",
   "scripts": {
-    "test": "jest --coverage --notify"
+    "test": "NODE_ENV=test sequelize db:migrate:undo:all &&  NODE_ENV=test sequelize db:migrate && NODE_ENV=test sequelize db:seed:all &&  jest",
+    "start": "NODE_ENV=test sequelize db:migrate:undo:all &&  NODE_ENV=test sequelize db:migrate && NODE_ENV=test sequelize db:seed:all && NODE_ENV=test nodemon source/server.js"
   },
   "repository": {
     "type": "git",
@@ -23,9 +24,19 @@
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.6.1",
-    "jest": "^22.1.4"
+    "jest": "^22.1.4",
+    "nodemon": "^1.14.12"
   },
   "dependencies": {
-    "hapi": "^16.6.2"
+    "bcrypt": "^1.0.3",
+    "handlebars": "^4.0.11",
+    "hapi": "^16.6.2",
+    "inert": "^5.1.0",
+    "joi": "^13.1.2",
+    "pg": "^7.4.1",
+    "sequelize": "^4.32.6",
+    "sequelize-cli": "^3.2.0",
+    "strftime": "^0.10.0",
+    "vision": "^4.1.1"
   }
 }
