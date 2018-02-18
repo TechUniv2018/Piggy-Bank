@@ -43,65 +43,62 @@ describe('Testing the hapi server for GET request', () => {
       expect(response.statusCode).toBe(400);
       done();
     });
-  });  test('Valid status code for correct password', (done) => {
-      const options = {
-        method: 'POST',
-        url: '/auth',
-        payload: {
-          userName: 'anmolvarma',
-          userPassword: 'Scooby!23',
-        },
-      };
-      Server.inject(options, (response) => {
-        expect(response.result.statusCode).toBe(200);
-        done();
-      });
+  }); test('Valid status code for correct password', (done) => {
+    const options = {
+      method: 'POST',
+      url: '/auth',
+      payload: {
+        userName: 'anmolvarma',
+        userPassword: 'Scooby!23',
+      },
+    };
+    Server.inject(options, (response) => {
+      expect(response.result.statusCode).toBe(200);
+      done();
     });
+  });
 
-    test('Get access token for correct password', (done) => {
-      const options = {
-        method: 'POST',
-        url: '/auth',
-        payload: {
-          userName: 'anmolvarma',
-          userPassword: 'Scooby!23',
-        },
-      };
-      Server.inject(options, (response) => {
-        console.log(response.result);
-        expect(typeof response.headers.token).toBe('string');
-        done();
-      });
+  test('Get access token for correct password', (done) => {
+    const options = {
+      method: 'POST',
+      url: '/auth',
+      payload: {
+        userName: 'anmolvarma',
+        userPassword: 'Scooby!23',
+      },
+    };
+    Server.inject(options, (response) => {
+      expect(typeof response.headers.token).toBe('string');
+      done();
     });
-    test('Invalid username and password', (done) => {
-      const options = {
-        method: 'POST',
-        url: '/auth',
-        payload: {
-          userName: 'dsfnnkds',
-          userPassword: 'Scooby!23',
-        },
-      };
-      Server.inject(options, (response) => {
-        console.log(response.result);
-        expect(response.result.message).toBe('Invalid username or password');
-        done();
-      });
+  });
+  test('Invalid username and password', (done) => {
+    const options = {
+      method: 'POST',
+      url: '/auth',
+      payload: {
+        userName: 'dsfnnkds',
+        userPassword: 'Scooby!23',
+      },
+    };
+    Server.inject(options, (response) => {
+      expect(response.result.message).toBe('Invalid username or password');
+      done();
     });
+  });
 
-    test('User trying to login after logging in', (done) => {
-      const options = {
-        method: 'POST',
-        url: '/auth',
-        payload: {
-          userName: 'anmvarma',
-          userPassword: 'Scooby!23',
-        },
-      };
-      Server.inject(options, (response) => {
-        console.log(response.result);
-        expect(response.result.message).toBe('User already logged in');
-        done();
-      });
+  test('User trying to login after logging in', (done) => {
+    const options = {
+      method: 'POST',
+      url: '/auth',
+      payload: {
+        userName: 'anmvarma',
+        userPassword: 'Scooby!23',
+      },
+    };
+    Server.inject(options, (response) => {
+      expect(response.result.message).toBe('User already logged in');
+      done();
     });
+  });
 });
