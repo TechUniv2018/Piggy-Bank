@@ -1,5 +1,4 @@
 const Models = require('../../models');
-const Sequelize = require('sequelize');
 
 module.exports = [
   {
