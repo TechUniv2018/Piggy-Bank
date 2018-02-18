@@ -7,15 +7,15 @@ describe('Server test', () => {
     Models.bankusers.create({
       userName: 'pari',
       password: '$2a$10$uBqWq2mNznlnCisaC.i3UOahjcC9I4CYWy3gGr2w5/oCGCVur0wOm', // wearebest2D%
-      firstName: 'Anmol',
-      lastName: 'Varma',
-      phoneNumber: 8475375640,
-      email: 'anmol5varma@gmail.com',
+      firstName: 'Paridhi',
+      lastName: 'Mohindra',
+      phoneNumber: 9481867815,
+      email: 'pari815@gmail.com',
       dob: new Date(1996, 10, 26),
-      gender: 'Male',
+      gender: 'Female',
       panCardNumber: 'ABCDE1234F',
       user_pic: '',
-      fatherName: 'Varma ji',
+      fatherName: 'R.K.Mohindra',
       createdAt: new Date(),
       updatedAt: new Date(),
     }).then(() => {
@@ -33,7 +33,7 @@ describe('Server test', () => {
   test('Responds with success for valid request', (done) => {
     const options = {
       method: 'PUT',
-      url: '/users/update',
+      url: '/users',
       payload: {
         userName: 'pari',
         email: 'p@gmail.com',
@@ -57,7 +57,7 @@ describe('Server test', () => {
   test('response message verified', (done) => {
     const options = {
       method: 'PUT',
-      url: '/users/update',
+      url: '/users',
       payload: {
         userName: 'pari',
         email: 'p@gmail.com',
@@ -71,7 +71,7 @@ describe('Server test', () => {
   test('Check for Null cases', (done) => {
     const options = {
       method: 'PUT',
-      url: '/users/update',
+      url: '/users',
       payload: {
         userName: 'pari',
         email: 'pari@gmail.com',
@@ -86,7 +86,7 @@ describe('Server test', () => {
   test('Check for undefined cases', (done) => {
     const options = {
       method: 'PUT',
-      url: '/users/update',
+      url: '/users',
       payload: {
         userName: 'pari',
         email: undefined,
@@ -103,7 +103,7 @@ describe('Server test', () => {
   test('Check When no value is passed in the field', (done) => {
     const options = {
       method: 'PUT',
-      url: '/users/update',
+      url: '/users',
       payload: {
         userName: 'pari',
         email: 'paridhi_mohindra@mckinsey.com',
@@ -120,7 +120,7 @@ describe('Server test', () => {
   test('Check If it updates a row in the database', (done) => {
     const options = {
       method: 'PUT',
-      url: '/users/update',
+      url: '/users',
       payload: {
         userName: 'pari',
         email: 'paridhi_mohindra@mckinsey.com',

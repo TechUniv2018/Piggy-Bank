@@ -4,7 +4,7 @@ const strftime = require('strftime');
 module.exports = [
   {
     method: 'GET',
-    path: '/dashboard',
+    path: '/user/details',
     handler: (request, response) => {
       Models.bankusers.findOne({ where: { userName: request.query.username } })
         .then((result) => {

@@ -3,7 +3,7 @@ const Models = require('../../models');
 module.exports = [
   {
     method: 'PUT',
-    path: '/users/update',
+    path: '/users',
     handler: (request, response) => {
       const updateObject = request.payload;
       const username = request.payload.userName;
