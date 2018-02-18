@@ -23,7 +23,7 @@ describe('Testing the login functionality', () => {
 
   afterEach((done) => {
     Models.user_authenticates.destroy({
-      where: { userid: 'John_1234' },
+      where: { userid: 'John_1234' || 'anmvarma' },
       truncate: true,
     }).then(() => {
       done();

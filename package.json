@@ -37,6 +37,7 @@
     "sequelize": "^4.32.6",
     "sequelize-cli": "^3.2.0",
     "strftime": "^0.10.0",
+    "uuid": "^3.2.1",
     "vision": "^4.1.1"
   }
 }

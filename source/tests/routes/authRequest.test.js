@@ -53,6 +53,7 @@ describe('Testing the hapi server for GET request', () => {
       },
     };
     Server.inject(options, (response) => {
+      // console.log(response.result, '*');
       expect(response.result.statusCode).toBe(200);
       done();
     });
@@ -68,6 +69,7 @@ describe('Testing the hapi server for GET request', () => {
       },
     };
     Server.inject(options, (response) => {
+      // console.log(response.headers);
       expect(typeof response.headers.token).toBe('string');
       done();
     });
