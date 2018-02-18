@@ -43,5 +43,35 @@ describe('Testing the hapi server for GET request', () => {
       expect(response.statusCode).toBe(400);
       done();
     });
-  });
+  });  test('Valid status code for correct password', (done) => {
+      const options = {
+        method: 'POST',
+        url: '/auth',
+        payload: {
+          userName: 'anmolvarma',
+          userPassword: 'Scooby!23',
+        },
+      };
+      Server.inject(options, (response) => {
+        expect(response.result.statusCode).toBe(200);
+        done();
+      });
+    });
+
+    test('Get access token for correct password', (done) => {
+      const options = {
+        method: 'POST',
+        url: '/auth',
+        payload: {
+          userName: 'anmolvarma',
+          userPassword: 'Scooby!23',
+        },
+      };
+      Server.inject(options, (response) => {
+        console.log(response.result);
+        expect(typeof response.headers.token).toBe('string');
+        done();
+      });
+    });
+
 });
