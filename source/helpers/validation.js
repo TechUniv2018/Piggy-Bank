@@ -1,7 +1,7 @@
 const Joi = require('joi');
 
 const schema = {
-  username: Joi.string().min(5).max(15).regex(/^[a-z][a-zA-Z0-9_]*$/i),
+  username: Joi.string().min(5).max(15).regex(/^[a-z][a-z0-9_]*$/i),
   /*
     password rules :
     1.Start with alphabet
@@ -20,3 +20,5 @@ const validation = (data, config) => {
   return 'invalid';
 };
 module.exports = validation;
+
+// console.log(validation({ username:"J", userPassword:"wearebest2D%" }))
