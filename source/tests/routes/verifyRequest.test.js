@@ -33,8 +33,21 @@ describe('Testing the hapi server for GET request', () => {
       },
     };
     Server.inject(options, (response) => {
-      // console.log(response.result, '**()');
       expect(response.result.message).toBe('User is verified');
+      done();
+    });
+  });
+  test('Verify a user', (done) => {
+    const options = {
+      method: 'GET',
+      url: '/auth',
+      headers: {
+        user: 'anmolvarma',
+        token: '1221334',
+      },
+    };
+    Server.inject(options, (response) => {
+      expect(response.result.message).toBe('User is not verified. Redirect to login page');
       done();
     });
   });
