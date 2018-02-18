@@ -32,7 +32,7 @@ describe('Testing the hapi server for GET request', () => {
   test('Should return 200 status code for sucessful GET request', (done) => {
     const options = {
       method: 'GET',
-      url: '/dashboard?username=anmol5varma',
+      url: '/user/details',
     };
     Server.inject(options, (response) => {
       expect(response.statusCode).toBe(200);
