@@ -73,5 +73,35 @@ describe('Testing the hapi server for GET request', () => {
         done();
       });
     });
+    test('Invalid username and password', (done) => {
+      const options = {
+        method: 'POST',
+        url: '/auth',
+        payload: {
+          userName: 'dsfnnkds',
+          userPassword: 'Scooby!23',
+        },
+      };
+      Server.inject(options, (response) => {
+        console.log(response.result);
+        expect(response.result.message).toBe('Invalid username or password');
+        done();
+      });
+    });
 
+    test('User trying to login after logging in', (done) => {
+      const options = {
+        method: 'POST',
+        url: '/auth',
+        payload: {
+          userName: 'anmvarma',
+          userPassword: 'Scooby!23',
+        },
+      };
+      Server.inject(options, (response) => {
+        console.log(response.result);
+        expect(response.result.message).toBe('User already logged in');
+        done();
+      });
+    });
 });
