@@ -16,6 +16,8 @@ describe('Testing edit Password', () => {
       panCardNumber: 'ABCDE1234F',
       user_pic: '',
       fatherName: 'Mohindra ji',
+      address: 'where is the house',
+      aadharNumber: '123412341234',
       createdAt: new Date(),
       updatedAt: new Date(),
     }).then(() => {

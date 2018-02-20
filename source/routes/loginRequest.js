@@ -20,7 +20,7 @@ module.exports = [
             verifyPassword(userPassword, passwordDigest).then((flag) => {
               if (flag === false) {
                 response({ message: 'Authentication failed [Incorrect password]' });
-              } else { response.redirect(`http://localhost:8080/dashboard?username=${username}`); }
+              } else { response.redirect(`http://localhost:8080/users/details?username=${username}`); }
             });
           }
         });

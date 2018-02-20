@@ -16,6 +16,8 @@ describe('Server test', () => {
       panCardNumber: 'ABCDE1234F',
       user_pic: '',
       fatherName: 'R.K.Mohindra',
+      address: 'where is the house',
+      aadharNumber: '123412341234',
       createdAt: new Date(),
       updatedAt: new Date(),
     }).then(() => {
