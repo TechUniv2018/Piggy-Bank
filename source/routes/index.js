@@ -9,8 +9,9 @@ const authenticate = require('./authRequest');
 const verify = require('./verifyRequest');
 const logout = require('./deleteRequest');
 const editPassword = require('./editPassword');
+const signUp = require('./signup');
 
 module.exports = [].concat(
   getRequest, getReqQuery, loginRequest, verify, logout, updateAccountDetails,
-  getReqValue, moveToDashbboard, showLogin, authenticate, editPassword,
+  getReqValue, moveToDashbboard, showLogin, authenticate, editPassword, signUp,
 );
