@@ -80,7 +80,7 @@ module.exports = {
       },
     },
     user_pic: {
-      allowNull: false,
+      allowNull: true,
       type: Sequelize.STRING,
     },
     createdAt: {
