@@ -71,4 +71,52 @@ describe('Testing the hapi server for GET request', () => {
       done();
     });
   });
+
+  test('Try adding an entry with invalid password', (done) => {
+    const options = {
+      method: 'POST',
+      url: '/users',
+      payload: {
+        username: 'anmol5varma',
+        password: 'Scoo23',
+        cpassword: 'Scoo23',
+        firstName: 'Anmol',
+        lastName: 'Varma',
+        fatherName: 'email',
+        email: 'anmol5@gmail.com',
+        dob: '26-10-1996',
+        contact: '9450134914',
+        gender: 'Male',
+        panCard: 'ABCDE1234F',
+      },
+    };
+    Server.inject(options, (response) => {
+      expect(response.statusCode).toBe(400);
+      done();
+    });
+  });
+
+  test('Try adding an entry with different password and confirm password', (done) => {
+    const options = {
+      method: 'POST',
+      url: '/users',
+      payload: {
+        username: 'anmol5varma',
+        password: 'Scooby!23',
+        cpassword: 'Scooby!43',
+        firstName: 'Anmol',
+        lastName: 'Varma',
+        fatherName: 'email',
+        email: 'anmol5gmail.com',
+        dob: '26-10-1996',
+        contact: '9450134914',
+        gender: 'Male',
+        panCard: 'ABCDE1234F',
+      },
+    };
+    Server.inject(options, (response) => {
+      expect(response.statusCode).toBe(400);
+      done();
+    });
+  });
 });
