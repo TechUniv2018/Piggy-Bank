@@ -4,24 +4,22 @@ const generateHash = require('../../helpers/generateHash');
 
 describe('Testing the hapi server for GET request', () => {
   beforeEach((done) => {
-    generateHash('Scooby!23', 10).then((hashedPassword) => {
-      Models.user_authentication.bulkCreate([{
-        userid: 'anmolvarma',
-        password: hashedPassword,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        userid: 'anmvarma',
-        password: hashedPassword,
-        token: '1234',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      ]).then(() => {
-        done();
-      });
-    }).catch((err) => {
+    generateHash('Scooby!23', 10).then(hashedPassword => Models.user_authentication.bulkCreate([{
+      userid: 'anmolvarma',
+      password: hashedPassword,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      userid: 'anmvarma',
+      password: hashedPassword,
+      token: '1234',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    ]).then(() => {
+      done();
+    })).catch((err) => {
       console.log(err.message);
     });
   });
