@@ -35,4 +35,14 @@ describe('Testing the hapi server for GET request', () => {
       done();
     });
   });
+  test('Responds with Not Found for invalid path', (done) => {
+    const options = {
+      method: 'GET',
+      url: '/user/mini',
+    };
+    Server.inject(options, (response) => {
+      expect(response.result.statusCode).toBe(404);
+      done();
+    });
+  });
 });
