@@ -15,6 +15,8 @@ describe('Testing the hapi server for GET request', () => {
       panCardNumber: 'ABCDE1234F',
       user_pic: '',
       fatherName: 'Varma ji',
+      address: 'where is the house',
+      aadharNumber: '123412341234',
       createdAt: new Date(),
       updatedAt: new Date(),
     }).then(() => {
