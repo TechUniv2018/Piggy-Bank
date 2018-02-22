@@ -41,6 +41,24 @@ test('insert transaction into transaction table should be successful', (done) =>
   });
 });
 
+
+test('insert into transactionshould throw an error if amount is not an integer', (done) => {
+  const date = new Date();
+  const transactionObject = {
+    transactionId: 'transaction_0081500',
+    transactionStatus: 'complete', // wearebest2D%
+    transactionTimestamp: date,
+    fromAccount: 90351910,
+    toAccount: 90351910,
+    amount: 'abcd',
+    transactionType: 'credit',
+  };
+
+  Models.transactions.create(transactionObject).catch(() => {
+    done();
+  });
+});
+
 beforeEach((done) => {
   Promise.all(cleanUpAllTables()).then(() => {
     done();
