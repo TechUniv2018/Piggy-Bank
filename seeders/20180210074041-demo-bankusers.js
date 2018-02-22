@@ -13,6 +13,8 @@ module.exports = {
     panCardNumber: 'ABCDE1234F',
     user_pic: '',
     fatherName: 'Kris Doe',
+    address: 'where is the house',
+    aadharNumber: '123412341234',
     createdAt: new Date(),
     updatedAt: new Date(),
   },
@@ -28,6 +30,8 @@ module.exports = {
     panCardNumber: 'EFGHI5678P',
     user_pic: '',
     fatherName: 'Sam Lopez',
+    address: 'where is the house',
+    aadharNumber: '123412341234',
     createdAt: new Date(),
     updatedAt: new Date(),
   },
@@ -36,6 +40,8 @@ module.exports = {
   down: (queryInterface, Sequelize) => {
     queryInterface.bulkDelete('bankusers', [{
       userName: 'John1234',
+    }, {
+      userName: 'Suzan_best',
     }]);
   },
 };
