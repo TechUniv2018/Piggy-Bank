@@ -12,9 +12,7 @@ module.exports = [module.exports = {
         userName: request.payload.userName,
       },
     }).then((data) => {
-      console.log(request.payload.password, data.password, '>>><<<<<');
       verifyPassword(request.payload.password, data.password).then((res) => {
-        console.log(res, '????');
         if (res) {
           if (validation({ username: request.payload.userName, userPassword: request.payload.password1 }) === 'valid') {
             if (request.payload.password1 === request.payload.password2) {

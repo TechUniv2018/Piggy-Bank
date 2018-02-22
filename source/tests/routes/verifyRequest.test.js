@@ -3,8 +3,8 @@ const Models = require('../../../models');
 
 describe('Testing the hapi server for GET request', () => {
   beforeEach((done) => {
-    Models.user_authenticates.destroy({ where: { userid: 'anmolvarma' }, truncate: true }).then(() => {
-      Models.user_authenticates.create({
+    Models.user_authentication.destroy({ where: { userid: 'anmolvarma' }, truncate: true }).then(() => {
+      Models.user_authentication.create({
         userid: 'anmolvarma',
         password: 'Scooby!23',
         token: '1234',
@@ -19,7 +19,7 @@ describe('Testing the hapi server for GET request', () => {
   });
 
   afterEach((done) => {
-    Models.user_authenticates.destroy({
+    Models.user_authentication.destroy({
       where: { userid: 'anmolvarma' },
       truncate: true,
     }).then(() => {

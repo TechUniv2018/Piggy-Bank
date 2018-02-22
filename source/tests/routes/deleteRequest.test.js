@@ -1,21 +1,26 @@
 const Server = require('../../server');
 const Models = require('../../../models');
+const generateHash = require('../../helpers/generateHash');
 
 describe('Testing the hapi server for DELETE request', () => {
   beforeEach((done) => {
-    Models.user_authenticates.create({
-      userid: 'anmolvarma',
-      password: 'Scooby!23',
-      token: '1234',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    }).then(() => {
-      done();
-    }).catch();
+    generateHash('Scooby!23', 10).then((hashedPassword) => {
+      Models.user_authentication.bulkCreate([{
+        userid: 'anmolvarma',
+        password: hashedPassword,
+        token: '1234',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      }]).then(() => {
+        done();
+      });
+    }).catch((err) => {
+      console.log(err.message);
+    });
   });
 
   afterEach((done) => {
-    Models.user_authenticates.destroy({
+    Models.user_authentication.destroy({
       where: { userid: 'anmolvarma' },
       truncate: true,
     }).then(() => {
@@ -23,7 +28,7 @@ describe('Testing the hapi server for DELETE request', () => {
     }).catch();
   });
 
-  test('Verify a user', (done) => {
+  test('Logout a logged in user and check message', (done) => {
     const options = {
       method: 'DELETE',
       url: '/auth',
@@ -37,7 +42,7 @@ describe('Testing the hapi server for DELETE request', () => {
       done();
     });
   });
-  test('Verify a user', (done) => {
+  test('Logout a logged in user and check statusCode', (done) => {
     const options = {
       method: 'DELETE',
       url: '/auth',
@@ -51,8 +56,7 @@ describe('Testing the hapi server for DELETE request', () => {
       done();
     });
   });
-
-  test('Verify a user', (done) => {
+  test('Not a valid user', (done) => {
     const options = {
       method: 'DELETE',
       url: '/auth',
@@ -66,7 +70,7 @@ describe('Testing the hapi server for DELETE request', () => {
       done();
     });
   });
-  test('Verify a user', (done) => {
+  test('Not a valid user', (done) => {
     const options = {
       method: 'DELETE',
       url: '/auth',

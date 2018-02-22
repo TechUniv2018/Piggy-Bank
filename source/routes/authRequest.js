@@ -1,16 +1,16 @@
 const uuidv1 = require('uuid/v1');
 const Models = require('../../models');
+const verifyPassword = require('../helpers/verifyPassword');
 // const Boom = require('boom');
 const Joi = require('joi');
 
-const fetchUserEntry = (username, password) => Models.user_authenticates.findOne({
+const fetchUserEntry = username => Models.user_authentication.findOne({
   where: {
     userid: username,
-    password,
   },
 });
 
-const updatehUserEntry = (username, value) => Models.user_authenticates.update({
+const updatehUserEntry = (username, value) => Models.user_authentication.update({
   token: value,
 }, {
   where: {
@@ -19,29 +19,34 @@ const updatehUserEntry = (username, value) => Models.user_authenticates.update({
 });
 
 
-const checkUser = (userEntry, username) => {
+const checkUser = (userEntry, password) => {
   const getUUID = uuidv1();
   // console.log(userEntry, '##');
   if (userEntry) {
-    if (userEntry.token === null) {
-      return updatehUserEntry(username, getUUID).then((ifUpdated) => {
-        console.log(ifUpdated);
-        // console.log(typeof getUUID);
-        if (ifUpdated[0] === 1) {
-          return { message: { message: 'User authenticated', statusCode: 200 }, token: getUUID };
+    return verifyPassword(password, userEntry.password).then((isValid) => {
+      if (isValid) {
+        if (userEntry.token === null) {
+          return updatehUserEntry(userEntry.userid, getUUID).then((ifUpdated) => {
+            console.log(ifUpdated);
+            // console.log(typeof getUUID);
+            if (ifUpdated[0] === 1) {
+              return { message: { message: 'User authenticated', statusCode: 200 }, token: getUUID };
+            }
+            // userMessage = Boom.serverUnavailable('Server error');
+            // userMessage.token = null;
+            return { message: { message: 'Server error', statusCode: 500 }, token: null };
+          });
         }
-        // userMessage = Boom.serverUnavailable('Server error');
+        // userMessage = Boom.conflict('User already logged in');
         // userMessage.token = null;
-        return { message: { message: 'Server error', statusCode: 500 }, token: null };
-      });
-    }
-    // userMessage = Boom.conflict('User already logged in');
-    // userMessage.token = null;
-    return Promise.resolve({ message: { message: 'User already logged in', statusCode: 204 }, token: null });
+        return Promise.resolve({ message: { message: 'User already logged in', statusCode: 204 }, token: null });
+      }
+      return Promise.resolve({ message: { message: 'Wrong password', statusCode: 401 }, token: null });
+    });
   }
   // userMessage = Boom.unauthorized('Invalid username or password');
   // userMessage.token = null;
-  return Promise.resolve({ message: { message: 'Invalid username or password', statusCode: 401 }, token: null });
+  return Promise.resolve({ message: { message: 'Invalid username', statusCode: 401 }, token: null });
 };
 
 module.exports = [
@@ -52,8 +57,8 @@ module.exports = [
       handler: (request, response) => {
         const username = request.payload.userName;
         const password = request.payload.userPassword;
-        fetchUserEntry(username, password).then((userEntry) => {
-          checkUser(userEntry, username).then((returnMessage) => {
+        fetchUserEntry(username).then((userEntry) => {
+          checkUser(userEntry, password).then((returnMessage) => {
             console.log(returnMessage);
             response(returnMessage.message).header('token', returnMessage.token);
           });
