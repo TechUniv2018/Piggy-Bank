@@ -8,8 +8,7 @@ const editPassword = require('./editPassword');
 const signUp = require('./signup');
 
 module.exports = [].concat(
-  loginRequest, verify, logout, updateAccountDetails,
+  verify, logout, updateAccountDetails,
   moveToDashbboard, authenticate, editPassword, signUp,
-  loginRequest, updateAccountDetails,
-  editPassword, moveToDashbboard,
+  loginRequest,
 );
