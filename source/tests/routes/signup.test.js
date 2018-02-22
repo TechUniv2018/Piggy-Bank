@@ -2,24 +2,6 @@ const Server = require('../../server');
 const Models = require('../../../models');
 
 describe('Testing the hapi server for GET request', () => {
-  // beforeEach((done) => {
-  //   Models.bankusers.create({
-  //     username: 'anmol5varma',
-  //     password: 'Scooby!23',
-  //     cpassword: 'Scooby!23',
-  //     firstName: 'Anmol',
-  //     lastName: 'Varma',
-  //     fatherName: 'email',
-  //     email: 'anmol5varma@gmail.com',
-  //     dob: '26-10-1996',
-  //     contact: '9450134914',
-  //     gender: 'Male',
-  //     panCard: 'ABCDE1234F',
-  //   }).then(() => {
-  //     done();
-  //   }).catch();
-  // });
-
   afterEach((done) => {
     Models.user_authenticates.destroy({
       where: { userid: 'anmol5varma' },
@@ -107,6 +89,55 @@ describe('Testing the hapi server for GET request', () => {
         firstName: 'Anmol',
         lastName: 'Varma',
         fatherName: 'email',
+        email: 'anmol5@gmail.com',
+        dob: '26-10-1996',
+        contact: '9450134914',
+        gender: 'Male',
+        panCard: 'ABCDE1234F',
+      },
+    };
+    Server.inject(options, (response) => {
+      expect(response.result.statusCode).toBe(401);
+      expect(response.result.message).toBe('Passwords don\'t match');
+      done();
+    });
+  });
+
+  test('Try adding an entry with invalid date format', (done) => {
+    const options = {
+      method: 'POST',
+      url: '/users',
+      payload: {
+        username: 'anmol5varma',
+        password: 'Scooby!23',
+        cpassword: 'Scooby!43',
+        firstName: 'Anmol',
+        lastName: 'Varma',
+        fatherName: 'email',
+        email: 'anmol5gmail.com',
+        dob: '34-13-1996',
+        contact: '9450134914',
+        gender: 'Male',
+        panCard: 'ABCDE1234F',
+      },
+    };
+    Server.inject(options, (response) => {
+      expect(response.statusCode).toBe(400);
+      done();
+    });
+  });
+
+  test('Try adding an entry with invalid names', (done) => {
+    const options = {
+      method: 'POST',
+      url: '/users',
+      payload: {
+        username: 'anmol5varma',
+        password: 'Scooby!23',
+        cpassword: 'Scooby!43',
+        firstName: '123 asdasd',
+        lastName: 'Varma',
+        fatherName: '$54534sd',
         email: 'anmol5gmail.com',
         dob: '26-10-1996',
         contact: '9450134914',
@@ -116,6 +147,102 @@ describe('Testing the hapi server for GET request', () => {
     };
     Server.inject(options, (response) => {
       expect(response.statusCode).toBe(400);
+      done();
+    });
+  });
+
+  test('Try adding an entry with invalid gender value', (done) => {
+    const options = {
+      method: 'POST',
+      url: '/users',
+      payload: {
+        username: 'anmol5varma',
+        password: 'Scooby!23',
+        cpassword: 'Scooby!43',
+        firstName: 'Anmol',
+        lastName: 'Varma',
+        fatherName: 'email',
+        email: 'anmol5gmail.com',
+        dob: '26-10-1996',
+        contact: '9450134914',
+        gender: 'something',
+        panCard: 'ABCDE1234F',
+      },
+    };
+    Server.inject(options, (response) => {
+      expect(response.statusCode).toBe(400);
+      done();
+    });
+  });
+
+  test('Try adding an entry with invalid contact number', (done) => {
+    const options = {
+      method: 'POST',
+      url: '/users',
+      payload: {
+        username: 'anmol5varma',
+        password: 'Scooby!23',
+        cpassword: 'Scooby!43',
+        firstName: 'Anmol',
+        lastName: 'Varma',
+        fatherName: 'email',
+        email: 'anmol5gmail.com',
+        dob: '26-10-1996',
+        contact: '213345',
+        gender: 'Male',
+        panCard: 'ABCDE1234F',
+      },
+    };
+    Server.inject(options, (response) => {
+      expect(response.statusCode).toBe(400);
+      done();
+    });
+  });
+
+  test('Try adding an entry with invalid pan card number', (done) => {
+    const options = {
+      method: 'POST',
+      url: '/users',
+      payload: {
+        username: 'anmol5varma',
+        password: 'Scooby!23',
+        cpassword: 'Scooby!43',
+        firstName: 'Anmol',
+        lastName: 'Varma',
+        fatherName: 'email',
+        email: 'anmol5gmail.com',
+        dob: '26-10-1996',
+        contact: '213345',
+        gender: 'Male',
+        panCard: '1234123445',
+      },
+    };
+    Server.inject(options, (response) => {
+      expect(response.statusCode).toBe(400);
+      done();
+    });
+  });
+
+  test('Adding a valid query', (done) => {
+    const options = {
+      method: 'POST',
+      url: '/users',
+      payload: {
+        username: 'anmol5varma',
+        password: 'Scooby!23',
+        cpassword: 'Scooby!23',
+        firstName: 'Anmol',
+        lastName: 'Varma',
+        fatherName: 'email',
+        email: 'anmol5@gmail.com',
+        dob: '26-10-1996',
+        contact: '9450134914',
+        gender: 'Male',
+        panCard: 'ABCDE1234F',
+      },
+    };
+    Server.inject(options, (response) => {
+      expect(response.statusCode).toBe(200);
       done();
     });
   });

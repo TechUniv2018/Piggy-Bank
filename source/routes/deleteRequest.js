@@ -17,8 +17,9 @@ module.exports = [
     handler: (request, response) => {
       const username = request.headers.user;
       const accessToken = request.headers.token;
-      console.log(username, accessToken);
+      // console.log(username, accessToken);
       return deleteUserToken(username, accessToken).then((userEntry) => {
+        console.log(userEntry);
         if (userEntry[0] === 1) {
           return response({ message: 'User logged out', statusCode: 200 });
         }

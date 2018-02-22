@@ -24,8 +24,12 @@ module.exports = [
         if (request.payload.password === request.payload.cpassword) {
           generateHash(request.payload.password, 10).then((hashPassword) => {
             createUserObject.password = hashPassword;
-            Models.bankusers.create(createUserObject).then(() => response({ statusCode: 200, message: 'You have signed up. Login and enjoy.' }))
-              .catch(err => response({ statusCode: 500, message: 'Server error', error: err.message }));
+            Models.bankusers.create(createUserObject)
+              .then(() => response({ statusCode: 200, message: 'You have been signed up.' }))
+              .catch((err) => {
+                if (err.message === 'Validation error') { return response({ statusCode: 401, message: 'Username is taken' }); }
+                return response({ statusCode: 500, message: 'Server error', error: err.message });
+              });
           });
         } else {
           response({ statusCode: 401, message: 'Passwords don\'t match' });

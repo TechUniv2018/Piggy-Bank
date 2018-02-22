@@ -21,9 +21,11 @@ const updatehUserEntry = (username, value) => Models.user_authenticates.update({
 
 const checkUser = (userEntry, username) => {
   const getUUID = uuidv1();
+  // console.log(userEntry, '##');
   if (userEntry) {
     if (userEntry.token === null) {
       return updatehUserEntry(username, getUUID).then((ifUpdated) => {
+        console.log(ifUpdated);
         // console.log(typeof getUUID);
         if (ifUpdated[0] === 1) {
           return { message: { message: 'User authenticated', statusCode: 200 }, token: getUUID };
@@ -42,7 +44,6 @@ const checkUser = (userEntry, username) => {
   return Promise.resolve({ message: { message: 'Invalid username or password', statusCode: 401 }, token: null });
 };
 
-
 module.exports = [
   {
     method: 'POST',
@@ -53,6 +54,7 @@ module.exports = [
         const password = request.payload.userPassword;
         fetchUserEntry(username, password).then((userEntry) => {
           checkUser(userEntry, username).then((returnMessage) => {
+            console.log(returnMessage);
             response(returnMessage.message).header('token', returnMessage.token);
           });
         }).catch((err) => {

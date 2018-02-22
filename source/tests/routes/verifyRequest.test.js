@@ -3,15 +3,19 @@ const Models = require('../../../models');
 
 describe('Testing the hapi server for GET request', () => {
   beforeEach((done) => {
-    Models.user_authenticates.create({
-      userid: 'anmolvarma',
-      password: 'Scooby!23',
-      token: '1234',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    }).then(() => {
-      done();
-    }).catch();
+    Models.user_authenticates.destroy({ where: { userid: 'anmolvarma' }, truncate: true }).then(() => {
+      Models.user_authenticates.create({
+        userid: 'anmolvarma',
+        password: 'Scooby!23',
+        token: '1234',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      }).then(() => {
+        done();
+      });
+    }).catch((err) => {
+      console.log(err.message);
+    });
   });
 
   afterEach((done) => {
@@ -37,7 +41,8 @@ describe('Testing the hapi server for GET request', () => {
       done();
     });
   });
-  test('Verify a user', (done) => {
+
+  test('User is not verified', (done) => {
     const options = {
       method: 'GET',
       url: '/auth',
@@ -51,6 +56,7 @@ describe('Testing the hapi server for GET request', () => {
       done();
     });
   });
+
   test('Verify a user', (done) => {
     const options = {
       method: 'GET',
@@ -65,7 +71,8 @@ describe('Testing the hapi server for GET request', () => {
       done();
     });
   });
-  test('Verify a user', (done) => {
+
+  test('User is not verified', (done) => {
     const options = {
       method: 'GET',
       url: '/auth',

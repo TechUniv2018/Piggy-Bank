@@ -12,12 +12,6 @@ module.exports = {
       password: 'wearethebest2D%',
       createdAt: new Date(),
       updatedAt: new Date(),
-    },
-    {
-      userid: 'anmolvarma',
-      password: 'Scooby!23',
-      createdAt: new Date(),
-      updatedAt: new Date(),
     }], {}),
 
   down: (queryInterface, Sequelize) =>

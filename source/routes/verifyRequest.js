@@ -6,7 +6,7 @@ const fetchUserEntry = (username, accessToken) => Models.user_authenticates.find
     userid: username,
     token: accessToken,
   },
-});
+}).catch((err) => { console.log(err.message, '##'); return null; });
 
 module.exports = [
   {
@@ -16,6 +16,7 @@ module.exports = [
       const username = request.headers.user;
       const accessToken = request.headers.token;
       return fetchUserEntry(username, accessToken).then((userEntry) => {
+        // console.log(userEntry, accessToken);
         if (userEntry && accessToken) {
           return response({ message: 'User is verified', statusCode: 200 });
         }

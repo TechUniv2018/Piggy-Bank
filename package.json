@@ -4,8 +4,8 @@
   "description": "Mini Digital Bank",
   "main": "./source/server.js",
   "scripts": {
-    "test": "NODE_ENV=test sequelize db:migrate:undo:all &&  NODE_ENV=test sequelize db:migrate && NODE_ENV=test sequelize db:seed:all &&  jest --coverage --notify --forceExit",
-    "start": "NODE_ENV=test sequelize db:migrate:undo:all &&  NODE_ENV=test sequelize db:migrate && NODE_ENV=test sequelize db:seed:all && nodemon ./source/server.js"
+    "test": "NODE_ENV=test sequelize db:migrate:undo:all &&  NODE_ENV=test sequelize db:migrate && jest --coverage --notify --forceExit .",
+    "start": "sequelize db:migrate:undo:all &&  sequelize db:migrate && sequelize db:seed:all && nodemon ./source/server.js"
   },
   "repository": {
     "type": "git",

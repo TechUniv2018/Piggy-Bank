@@ -4,24 +4,27 @@ const Models = require('../../../models');
 
 describe('Testing edit Password', () => {
   beforeEach((done) => {
-    Models.bankusers.create({
-      userName: 'paridhi',
-      password: '$2a$10$uBqWq2mNznlnCisaC.i3UOahjcC9I4CYWy3gGr2w5/oCGCVur0wOm', // wearebest2D%
-      firstName: 'Paridhi',
-      lastName: 'Mohindra',
-      phoneNumber: 8475375640,
-      email: 'paridhi815@gmail.com',
-      dob: new Date(1996, 10, 26),
-      gender: 'Female',
-      panCardNumber: 'ABCDE1234F',
-      user_pic: '',
-      fatherName: 'Mohindra ji',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    }).then(() => {
-      done();
-    }).catch();
+    Models.user_authenticates.destroy({ truncate: true }).then(() => {
+      Models.bankusers.create({
+        userName: 'paridhi',
+        password: '$2a$10$uBqWq2mNznlnCisaC.i3UOahjcC9I4CYWy3gGr2w5/oCGCVur0wOm', // wearebest2D%
+        firstName: 'Paridhi',
+        lastName: 'Mohindra',
+        phoneNumber: 8475375640,
+        email: 'paridhi815@gmail.com',
+        dob: new Date(1996, 10, 26),
+        gender: 'Female',
+        panCardNumber: 'ABCDE1234F',
+        user_pic: '',
+        fatherName: 'Mohindra ji',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      }).then(() => {
+        done();
+      }).catch();
+    });
   });
+
   afterEach((done) => {
     Models.bankusers.destroy({
       where: { userName: 'paridhi' },
@@ -30,6 +33,7 @@ describe('Testing edit Password', () => {
       done();
     }).catch();
   });
+
   test('Responds with message for invalid password', (done) => {
     const options = {
       method: 'POST',
