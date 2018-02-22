@@ -8,9 +8,11 @@ const updateAccountDetails = require('./updateAccountDetails');
 const showLogin = require('./getLogin');
 const editPassword = require('./editPassword');
 const transactionRequest = require('./transaction.js');
+const transferMoeny = require('./transferMoney.js');
 
 module.exports = [].concat(
   getRequest, postRequest, getReqQuery,
   getReqValue, loginRequest, updateAccountDetails,
   showLogin, editPassword, moveToDashbboard, transactionRequest,
+  transferMoeny,
 );

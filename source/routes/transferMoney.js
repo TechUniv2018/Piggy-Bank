@@ -2,8 +2,7 @@
 const Joi = require('joi');
 const Models = require('../../models');
 const fetch = require('node-fetch');
-const uuid = require('uuid');
-const time = require('time');
+const crypto = require('crypto');
 
 module.exports = [
   {
@@ -35,18 +34,20 @@ module.exports = [
             }).then(result => result.json())
               .then((result) => {
                 if (result.status_code === 201) {
-                  Models.transactions.Create({
-                    transacationId: uuid.v1,
+                  const id = crypto.randomBytes(16).toString('hex');
+                  Models.transactions.create({
+                    transactionId: id,
                     transactionStatus: 'complete',
-                    toAccount: '$toAccountNumber',
-                    fromAccount: '$fromAccountNumber',
+                    toAccount: toAccountNumber,
+                    fromAccount: fromAccountNumber,
                     transactionType: 'transfer',
-                    tranactionTimeStamp: new time.Date(),
+                    transactionTimestamp: new Date(),
                     amount,
-
-
+                    createdAt: new Date(),
+                    updatedAt: new Date(),
+                  }).then(() => {
+                    response({ message: `${amount} rupees transfered from ${fromAccountNumber} to ${toAccountNumber}`, status_code: 201 });
                   });
-                  response({ message: `${amount} rupees transfered from ${fromAccountNumber} to ${toAccountNumber}`, status_code: 201 });
                 } else {
                   response({ message: 'Transfer failed', status_code: 400 });
                 }

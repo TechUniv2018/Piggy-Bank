@@ -1,8 +1,7 @@
-const depositMoney = require('../helpers/depositMoney');
-const withdrawMoney = require('../helpers/withdrawMoney');
 const getCurrentBalance = require('../../source/helpers/getCurrentBalance');
 const Joi = require('joi');
 const Models = require('../../models');
+const crypto = require('crypto');
 
 module.exports = [
   {
@@ -26,21 +25,43 @@ module.exports = [
             let balance = null;
             if ('currentBalance' in resp[0]) {
               balance = JSON.parse(JSON.stringify(resp))[0].currentBalance;
-              console.log(balance);
             }
             if (balance !== null && balance !== undefined && amount <= 2147483647 - balance) {
               Models.accounts.update({
                 currentBalance: +balance + +amount,
               }, { where: { accountNumber } }).then(() => {
-                response({ message: `${amount} rupees is added to your account`, status_code: 201 });
+                const id = crypto.randomBytes(16).toString('hex');
+                Models.transactions.create({
+                  transactionId: id,
+                  transactionStatus: 'complete',
+                  toAccount: accountNumber,
+                  fromAccount: accountNumber,
+                  transactionType: 'credit',
+                  transactionTimestamp: new Date(),
+                  amount,
+                  createdAt: new Date(),
+                  updatedAt: new Date(),
+                }).then(() => {
+                  response({ message: `${amount} rupees is added to your account`, status_code: 201 });
+                });
               }).catch(error => ({
                 data: `Error in depositing data => ${error.message}`,
                 status_code: 500,
               }));
             } else {
-              response({
-                message: 'Sorry,deposit failed',
-                status_code: 500,
+              const id = crypto.randomBytes(16).toString('hex');
+              Models.transactions.create({
+                transactionId: id,
+                transactionStatus: 'failed',
+                toAccount: accountNumber,
+                fromAccount: accountNumber,
+                transactionType: 'credit',
+                transactionTimestamp: new Date(),
+                amount,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+              }).then(() => {
+                response({ message: 'OOPS, deposit transaction failed', status_code: 500 });
               });
             }
           }).catch(() => {
@@ -60,15 +81,38 @@ module.exports = [
               Models.accounts.update({
                 currentBalance: +balance - +amount,
               }, { where: { accountNumber } }).then(() => {
-                response({ message: `${amount} rupees is withdrawed from your account`, status_code: 201 });
+                const id = crypto.randomBytes(16).toString('hex');
+                Models.transactions.create({
+                  transactionId: id,
+                  transactionStatus: 'complete',
+                  toAccount: accountNumber,
+                  fromAccount: accountNumber,
+                  transactionType: 'debit',
+                  transactionTimestamp: new Date(),
+                  amount,
+                  createdAt: new Date(),
+                  updatedAt: new Date(),
+                }).then(() => {
+                  response({ message: 'OOPS, deposit transaction failed', status_code: 500 });
+                });
               }).catch(error => ({
                 data: `Error in depositing data => ${error.message}`,
                 status_code: 500,
               }));
             } else {
-              response({
-                message: 'Sorry,withdrawal failed',
-                status_code: 500,
+              const id = crypto.randomBytes(16).toString('hex');
+              Models.transactions.create({
+                transactionId: id,
+                transactionStatus: 'failed',
+                toAccount: accountNumber,
+                fromAccount: accountNumber,
+                transactionType: 'debit',
+                transactionTimestamp: new Date(),
+                amount,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+              }).then(() => {
+                response({ message: `${amount} rupees is added to your account`, status_code: 201 });
               });
             }
           }).catch(() => {
