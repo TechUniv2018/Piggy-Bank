@@ -79,6 +79,21 @@ module.exports = (sequelize, DataTypes) => {
     user_pic: {
       type: DataTypes.STRING,
     },
+    address: {
+      allowNull: false,
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    aadharNumber: {
+      allowNull: false,
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: true,
+      },
+    },
+
   }, {
     classMethods: {
       associate(models) {

@@ -5,7 +5,7 @@ const Models = require('../../../models');
 describe('Server test', () => {
   beforeEach((done) => {
     Models.bankusers.create({
-      userName: 'pari',
+      userName: 'pari234',
       password: '$2a$10$uBqWq2mNznlnCisaC.i3UOahjcC9I4CYWy3gGr2w5/oCGCVur0wOm', // wearebest2D%
       firstName: 'Paridhi',
       lastName: 'Mohindra',
@@ -16,15 +16,18 @@ describe('Server test', () => {
       panCardNumber: 'ABCDE1234F',
       user_pic: '',
       fatherName: 'R.K.Mohindra',
+      address: 'where is the house',
+      aadharNumber: '123412341234',
       createdAt: new Date(),
       updatedAt: new Date(),
     }).then(() => {
       done();
     }).catch();
   });
+
   afterEach((done) => {
     Models.bankusers.destroy({
-      where: { userName: 'pari' },
+      where: { userName: 'pari234' },
       truncate: true,
     }).then(() => {
       done();
@@ -35,7 +38,7 @@ describe('Server test', () => {
       method: 'PUT',
       url: '/users',
       payload: {
-        userName: 'pari',
+        userName: 'pari234',
         email: 'p@gmail.com',
       },
     };
@@ -59,7 +62,7 @@ describe('Server test', () => {
       method: 'PUT',
       url: '/users',
       payload: {
-        userName: 'pari',
+        userName: 'pari234',
         email: 'p@gmail.com',
       },
     };
@@ -73,7 +76,7 @@ describe('Server test', () => {
       method: 'PUT',
       url: '/users',
       payload: {
-        userName: 'pari',
+        userName: 'pari234',
         email: 'pari@gmail.com',
         firstName: null,
       },
@@ -88,7 +91,7 @@ describe('Server test', () => {
       method: 'PUT',
       url: '/users',
       payload: {
-        userName: 'pari',
+        userName: 'pari234',
         email: undefined,
         firstName: 'paridhiMohindra',
         lastName: undefined,
@@ -105,7 +108,7 @@ describe('Server test', () => {
       method: 'PUT',
       url: '/users',
       payload: {
-        userName: 'pari',
+        userName: 'pari234',
         email: 'paridhi_mohindra@mckinsey.com',
         firstName: 'paridhi',
         lastName: 'mohindra',
@@ -122,7 +125,7 @@ describe('Server test', () => {
       method: 'PUT',
       url: '/users',
       payload: {
-        userName: 'pari',
+        userName: 'pari234',
         email: 'paridhi_mohindra@mckinsey.com',
         firstName: 'paridhi',
         lastName: 'mohindra',

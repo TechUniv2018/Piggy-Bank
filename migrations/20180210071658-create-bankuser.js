@@ -1,5 +1,3 @@
-
-
 module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.createTable('bankusers', {
     id: {
@@ -85,6 +83,20 @@ module.exports = {
     user_pic: {
       allowNull: false,
       type: Sequelize.STRING,
+    },
+    address: {
+      allowNull: false,
+      type: Sequelize.STRING,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    aadharNumber: {
+      allowNull: false,
+      type: Sequelize.STRING,
+      validate: {
+        notEmpty: true,
+      },
     },
     createdAt: {
       allowNull: false,

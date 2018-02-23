@@ -16,12 +16,15 @@ describe('Testing edit Password', () => {
       panCardNumber: 'ABCDE1234F',
       user_pic: '',
       fatherName: 'Mohindra ji',
+      address: 'where is the house',
+      aadharNumber: '123412341234',
       createdAt: new Date(),
       updatedAt: new Date(),
     }).then(() => {
       done();
     }).catch();
   });
+
   afterEach((done) => {
     Models.bankusers.destroy({
       where: { userName: 'paridhi' },
@@ -30,6 +33,7 @@ describe('Testing edit Password', () => {
       done();
     }).catch();
   });
+
   test('Responds with message for invalid password', (done) => {
     const options = {
       method: 'POST',
@@ -81,4 +85,3 @@ describe('Testing edit Password', () => {
     });
   });
 });
-
