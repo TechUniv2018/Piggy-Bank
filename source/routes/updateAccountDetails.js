@@ -16,21 +16,11 @@ module.exports = [
           delete updateObject[propName];
         }
       }
-      // console.log(updateObject);
-      // for (key in updateObject) {
-      //   console.log(updateObject[key], key);
-      //   if (updateObject[key] === null || updateObject[key] === '') {
-      //     delete updateObject[key];
-      //   }
-      // }
-      // console.log(updateObject);
       Models.bankusers.update(updateObject, {
         where: {
           userName: username,
         },
       }).then((result) => {
-        // console.log(result);
-        // response('Details Changed').code(201);
         response({
           statusCode: 201,
           updateFlag: result,
@@ -38,7 +28,7 @@ module.exports = [
         });
       }).catch((error) => {
         response({
-          data: `Error in fetching data => ${error}`,
+          data: `Error in fetching data => ${error.message}`,
           statusCode: 500,
         });
       });

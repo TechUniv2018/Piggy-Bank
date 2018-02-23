@@ -24,6 +24,7 @@ describe('Testing edit Password', () => {
       done();
     }).catch();
   });
+
   afterEach((done) => {
     Models.bankusers.destroy({
       where: { userName: 'paridhi' },
@@ -32,6 +33,7 @@ describe('Testing edit Password', () => {
       done();
     }).catch();
   });
+
   test('Responds with message for invalid password', (done) => {
     const options = {
       method: 'POST',
@@ -83,4 +85,3 @@ describe('Testing edit Password', () => {
     });
   });
 });
-

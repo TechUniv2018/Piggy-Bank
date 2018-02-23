@@ -23,6 +23,7 @@ describe('Testing the hapi server for GET request', () => {
       done();
     }).catch();
   });
+
   afterEach((done) => {
     Models.bankusers.destroy({
       where: { userName: 'anmol5varma' },

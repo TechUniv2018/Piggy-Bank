@@ -23,7 +23,11 @@ module.exports = {
       },
     },
     transactionTimestamp: {
+<<<<<<< HEAD
       type: Sequelize.DATE,
+=======
+      type: Sequelize.TIME,
+>>>>>>> 9179b6b6c1f16e9b45329a17eeb1965c228b7e53
       allowNull: false,
       validate: {
         notEmpty: true,

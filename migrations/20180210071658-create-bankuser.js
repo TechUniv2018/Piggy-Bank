@@ -8,11 +8,13 @@ module.exports = {
     },
     userName: {
       allowNull: false,
+      unique: true,
       validate: {
         notEmpty: true,
         len: [1, 50],
       },
       type: Sequelize.STRING,
+      unique: true,
     },
     password: {
       allowNull: false,

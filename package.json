@@ -4,8 +4,8 @@
   "description": "Mini Digital Bank",
   "main": "./source/server.js",
   "scripts": {
-    "test": "NODE_ENV=test sequelize db:migrate:undo:all &&  NODE_ENV=test sequelize db:migrate && NODE_ENV=test sequelize db:seed:all &&  jest",
-    "start": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all && nodemon source/server.js"
+    "test": "NODE_ENV=test sequelize db:migrate:undo:all &&  NODE_ENV=test sequelize db:migrate && jest --coverage --notify --forceExit .",
+    "start": "sequelize db:migrate:undo:all &&  sequelize db:migrate && sequelize db:seed:all && nodemon ./source/server.js"
   },
   "repository": {
     "type": "git",
@@ -33,10 +33,15 @@
     "hapi": "^16.6.2",
     "inert": "^5.1.0",
     "joi": "^13.1.2",
+    "joi-date-extensions": "^1.1.1",
+    "node-fetch": "^2.0.0",
     "pg": "^7.4.1",
+    "request-promise": "^4.2.2",
     "sequelize": "^4.32.6",
     "sequelize-cli": "^3.2.0",
     "strftime": "^0.10.0",
+    "time": "^0.12.0",
+    "uuid": "^3.2.1",
     "vision": "^4.1.1"
   }
 }
