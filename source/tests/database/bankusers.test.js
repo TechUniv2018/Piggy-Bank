@@ -10,7 +10,7 @@ describe('test bankusers table', () => {
       done();
     });
   });
-  test('insert transaction into transaction table should be successful', (done) => {
+  test('insert user into bankusers table should be successful', (done) => {
     const date = new Date();
     const userObject = {
       userName: 'pari',
