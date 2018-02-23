@@ -33,6 +33,7 @@
     "hapi": "^16.6.2",
     "inert": "^5.1.0",
     "joi": "^13.1.2",
+    "joi-date-extensions": "^1.1.1",
     "node-fetch": "^2.0.0",
     "pg": "^7.4.1",
     "request-promise": "^4.2.2",
