@@ -2,7 +2,6 @@
 const Joi = require('joi');
 const Models = require('../../models');
 const fetch = require('node-fetch');
-const crypto = require('crypto');
 
 module.exports = [
   {
@@ -34,9 +33,8 @@ module.exports = [
             }).then(result => result.json())
               .then((result) => {
                 if (result.status_code === 201) {
-                  const id = crypto.randomBytes(16).toString('hex');
                   Models.transactions.create({
-                    transactionId: id,
+                    transactionId: `${fromAccountNumber}_${toAccountNumber}_T_${new Date()}`,
                     transactionStatus: 'complete',
                     toAccount: toAccountNumber,
                     fromAccount: fromAccountNumber,
@@ -46,19 +44,18 @@ module.exports = [
                     createdAt: new Date(),
                     updatedAt: new Date(),
                   }).then(() => {
-                    response({ message: `${amount} rupees transfered from ${fromAccountNumber} to ${toAccountNumber}`, status_code: 201 });
+                    response({ message: `${amount} rupees transfered from account ${fromAccountNumber} to ${toAccountNumber}`, status_code: 201 });
                   });
                 } else {
-                  response({ message: 'Transfer failed', status_code: 401 });
+                  response({ message: 'Invalid account number', status_code: 401 });
                 }
               }).catch((error) => {
                 response({ message: error.message, status_code: 500 });
               });
-          } else response({ message: 'Transfer failed', status_code: 500 });
+          } else response({ message: 'Invalid account number or transfer amount', status_code: 500 });
         }).catch((error) => {
           response({ message: error.message, status_code: 500 });
         });
     },
   },
 ];
-

@@ -2,13 +2,13 @@ const Models = require('../../models');
 
 module.exports = [
   {
-    method: 'GET',
+    method: 'POST',
     path: '/user/miniStatement',
     handler: (request, response) => {
       Models.transactions.findAll({
         where: {
-          fromAccount: request.query.accountNumber,
-          toAccount: request.query.accountNumber,
+          fromAccount: request.payload.accountNumber,
+          toAccount: request.payload.accountNumber,
         },
         limit: 10,
       }).then((result) => {

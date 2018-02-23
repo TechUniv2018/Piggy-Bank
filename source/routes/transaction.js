@@ -1,7 +1,6 @@
 const getCurrentBalance = require('../../source/helpers/getCurrentBalance');
 const Joi = require('joi');
 const Models = require('../../models');
-const crypto = require('crypto');
 
 module.exports = [
   {
@@ -30,9 +29,8 @@ module.exports = [
               Models.accounts.update({
                 currentBalance: +balance + +amount,
               }, { where: { accountNumber } }).then(() => {
-                const id = crypto.randomBytes(16).toString('hex');
                 Models.transactions.create({
-                  transactionId: id,
+                  transactionId: `${accountNumber}_${accountNumber}_D_${new Date()}`,
                   transactionStatus: 'complete',
                   toAccount: accountNumber,
                   fromAccount: accountNumber,
@@ -42,16 +40,15 @@ module.exports = [
                   createdAt: new Date(),
                   updatedAt: new Date(),
                 }).then(() => {
-                  response({ message: `${amount} rupees is added to your account`, status_code: 201 });
+                  response({ message: `${amount} rupees is added to your account. New bbalance is ${amount + balance}`, status_code: 201 });
                 });
               }).catch(error => ({
                 data: `Error in depositing data => ${error.message}`,
                 status_code: 500,
               }));
             } else {
-              const id = crypto.randomBytes(16).toString('hex');
               Models.transactions.create({
-                transactionId: id,
+                transactionId: `${accountNumber}_${accountNumber}_D_${new Date()}`,
                 transactionStatus: 'failed',
                 toAccount: accountNumber,
                 fromAccount: accountNumber,
@@ -81,9 +78,8 @@ module.exports = [
               Models.accounts.update({
                 currentBalance: +balance - +amount,
               }, { where: { accountNumber } }).then(() => {
-                const id = crypto.randomBytes(16).toString('hex');
                 Models.transactions.create({
-                  transactionId: id,
+                  transactionId: `${accountNumber}_${accountNumber}_W_${new Date()}`,
                   transactionStatus: 'complete',
                   toAccount: accountNumber,
                   fromAccount: accountNumber,
@@ -93,16 +89,15 @@ module.exports = [
                   createdAt: new Date(),
                   updatedAt: new Date(),
                 }).then(() => {
-                  response({ message: `${amount} withdrawed from your account`, status_code: 201 });
+                  response({ message: `${amount} withdrawed from your account. New balance is ${balance - amount}`, status_code: 201 });
                 });
               }).catch(error => ({
                 data: `Error in withdrawing data => ${error.message}`,
                 status_code: 500,
               }));
             } else {
-              const id = crypto.randomBytes(16).toString('hex');
               Models.transactions.create({
-                transactionId: id,
+                transactionId: `${accountNumber}_${accountNumber}_W_${new Date()}`,
                 transactionStatus: 'failed',
                 toAccount: accountNumber,
                 fromAccount: accountNumber,
@@ -126,4 +121,3 @@ module.exports = [
     },
   },
 ];
-
