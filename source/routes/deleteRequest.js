@@ -1,7 +1,7 @@
 const Models = require('../../models');
 // const Boom = require('boom');
 
-const deleteUserToken = (username, accessToken) => Models.user_authenticates.update({
+const deleteUserToken = (username, accessToken) => Models.user_authentication.update({
   token: null,
 }, {
   where: {

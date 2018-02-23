@@ -1,32 +1,31 @@
 const Server = require('../../server');
 const Models = require('../../../models');
+const generateHash = require('../../helpers/generateHash');
 
 describe('Testing the hapi server for GET request', () => {
   beforeEach((done) => {
-    Models.user_authenticates.destroy({ where: { userid: 'anmolvarma' }, truncate: true }).then(() => {
-      Models.user_authenticates.bulkCreate([{
-        userid: 'anmolvarma',
-        password: 'Scooby!23',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        userid: 'anmvarma',
-        password: 'Scooby!23',
-        token: '1234',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      ]).then(() => {
-        done();
-      });
-    }).catch((err) => {
+    generateHash('Scooby!23', 10).then(hashedPassword => Models.user_authentication.bulkCreate([{
+      userid: 'anmolvarma',
+      password: hashedPassword,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      userid: 'anmvarma',
+      password: hashedPassword,
+      token: '1234',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    ]).then(() => {
+      done();
+    })).catch((err) => {
       console.log(err.message);
     });
   });
 
   afterEach((done) => {
-    Models.user_authenticates.destroy({
+    Models.user_authentication.destroy({
       where: { userid: 'anmolvarma' || 'anmvarma' },
       truncate: true,
     }).then(() => {
@@ -88,7 +87,7 @@ describe('Testing the hapi server for GET request', () => {
       },
     };
     Server.inject(options, (response) => {
-      expect(response.result.message).toBe('Invalid username or password');
+      expect(response.result.message).toBe('Invalid username');
       done();
     });
   });

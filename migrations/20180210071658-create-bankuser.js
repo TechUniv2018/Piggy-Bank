@@ -8,6 +8,7 @@ module.exports = {
     },
     userName: {
       allowNull: false,
+      unique: true,
       validate: {
         notEmpty: true,
         len: [1, 50],
@@ -81,7 +82,7 @@ module.exports = {
       },
     },
     user_pic: {
-      allowNull: false,
+      allowNull: true,
       type: Sequelize.STRING,
     },
     address: {
