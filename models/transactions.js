@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     transactionTimestamp: {
-      type: DataTypes.TIME,
+      type: DataTypes.DATE,
       allowNull: false,
       validate: {
         notEmpty: true,
