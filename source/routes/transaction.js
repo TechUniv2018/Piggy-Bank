@@ -65,7 +65,7 @@ module.exports = [
               });
             }
           }).catch(() => {
-            response({ message: 'Please enter valid account number', status_code: 400 });
+            response({ message: 'Please enter valid account number', status_code: 401 });
           });
           break;
         }
@@ -93,10 +93,10 @@ module.exports = [
                   createdAt: new Date(),
                   updatedAt: new Date(),
                 }).then(() => {
-                  response({ message: 'OOPS, deposit transaction failed', status_code: 500 });
+                  response({ message: `${amount} withdrawed from your account`, status_code: 201 });
                 });
               }).catch(error => ({
-                data: `Error in depositing data => ${error.message}`,
+                data: `Error in withdrawing data => ${error.message}`,
                 status_code: 500,
               }));
             } else {
@@ -112,16 +112,16 @@ module.exports = [
                 createdAt: new Date(),
                 updatedAt: new Date(),
               }).then(() => {
-                response({ message: `${amount} rupees is added to your account`, status_code: 201 });
+                response({ message: 'OOPS, withdraw transaction failed', status_code: 500 });
               });
             }
           }).catch(() => {
-            response({ message: 'Please enter valid account number', status_code: 400 });
+            response({ message: 'Please enter valid account number', status_code: 401 });
           });
           break;
         }
         default:
-          response({ message: 'Please enter valid action', status_code: 400 });
+          response({ message: 'Please enter valid action', status_code: 401 });
       }
     },
   },

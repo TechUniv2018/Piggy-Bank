@@ -49,14 +49,14 @@ module.exports = [
                     response({ message: `${amount} rupees transfered from ${fromAccountNumber} to ${toAccountNumber}`, status_code: 201 });
                   });
                 } else {
-                  response({ message: 'Transfer failed', status_code: 400 });
+                  response({ message: 'Transfer failed', status_code: 401 });
                 }
               }).catch((error) => {
-                response({ message: error.message, status_code: 400 });
+                response({ message: error.message, status_code: 500 });
               });
           } else response({ message: 'Transfer failed', status_code: 500 });
         }).catch((error) => {
-          response({ message: error.message, status_code: 400 });
+          response({ message: error.message, status_code: 500 });
         });
     },
   },
