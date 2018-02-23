@@ -1,7 +1,7 @@
 const Models = require('../../models');
 // const Boom = require('boom');
 
-const fetchUserEntry = (username, accessToken) => Models.user_authenticates.findOne({
+const fetchUserEntry = (username, accessToken) => Models.user_authentication.findOne({
   where: {
     userid: username,
     token: accessToken,

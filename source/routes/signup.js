@@ -17,15 +17,24 @@ module.exports = [
         createUserObject.lastName = request.payload.lastName;
         createUserObject.fatherName = request.payload.fatherName;
         createUserObject.email = request.payload.email;
+        createUserObject.address = request.payload.address;
         createUserObject.dob = request.payload.dob;
         createUserObject.phoneNumber = request.payload.contact;
         createUserObject.gender = request.payload.gender;
         createUserObject.panCardNumber = request.payload.panCard;
+        createUserObject.aadharNumber = request.payload.aadhar;
         if (request.payload.password === request.payload.cpassword) {
           generateHash(request.payload.password, 10).then((hashPassword) => {
             createUserObject.password = hashPassword;
             Models.bankusers.create(createUserObject)
-              .then(() => response({ statusCode: 200, message: 'You have been signed up.' }))
+              .then(() => {
+                const userTokenEntry = {};
+                userTokenEntry.userid = createUserObject.userName;
+                userTokenEntry.password = createUserObject.password;
+                userTokenEntry.token = null;
+                return Models.user_authentication.create(userTokenEntry).then(() => response({ statusCode: 200, message: 'Login and enjoy' }))
+                  .catch(err => response({ statusCode: 500, message: 'Server error', error: err.message }));
+              })
               .catch((err) => {
                 if (err.message === 'Validation error') { return response({ statusCode: 401, message: 'Username is taken' }); }
                 return response({ statusCode: 500, message: 'Server error', error: err.message });
@@ -43,6 +52,8 @@ module.exports = [
           lastName: Joi.string().regex(/^[a-zA-Z][a-zA-Z]*$/).required(),
           fatherName: Joi.string().regex(/^[a-zA-Z][a-zA-Z ]*$/).required(),
           email: Joi.string().email().required(),
+          address: Joi.string().required(),
+          aadhar: Joi.string().regex(/^[1-9]{1}[0-9]{11}$/).required(),
           dob: Joi.date().format('DD-MM-YYYY').required(),
           contact: Joi.string().min(10).regex(/^[1-9]{1}[0-9]{9}$/).required(),
           gender: Joi.string().regex(/^(male|female|others)$/i).required(),
