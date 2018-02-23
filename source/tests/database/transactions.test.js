@@ -42,7 +42,7 @@ test('insert transaction into transaction table should be successful', (done) =>
 });
 
 
-test('insert into transactionshould throw an error if amount is not an integer', (done) => {
+test('insert into transaction should throw an error if amount is not an integer', (done) => {
   const date = new Date();
   const transactionObject = {
     transactionId: 'transaction_0081500',
