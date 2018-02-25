@@ -2,54 +2,39 @@
 
 module.exports = (sequelize, DataTypes) => {
   const users = sequelize.define('users', {
-    phone_number: {
-      Type: DataTypes.TEXT,
+    phoneNumber: {
+      type: DataTypes.STRING,
       allowNull: false,
       unique: true,
-      defaultValue: null,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    userName: {
+      type: DataTypes.STRING,
+      allowNull: false,
       validate: {
         notEmpty: true,
       },
     },
     password: {
-      Type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-      },
-    },
-    user_name: {
-      Type: DataTypes.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notEmpty: true,
       },
     },
     aadhar: {
-      Type: DataTypes.STRING,
-      defaultValue: null,
-      validate: {
-        notEmpty: true,
-      },
+      type: DataTypes.STRING,
       unique: true,
     },
     email: {
-      Type: DataTypes.STRING,
-      defaultValue: null,
-      validate: {
-        notEmpty: true,
-        isEmail: true,
-        len: [1, 255],
-      },
-
+      type: DataTypes.STRING,
+      unique: true,
     },
-    kyc: {
-      Type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false,
-    },
-    accout_id: {
-      Type: DataTypes.STRING,
+    kyc: DataTypes.BOOLEAN,
+    accountId: {
+      type: DataTypes.STRING,
       allowNull: false,
       unique: true,
       validate: {
@@ -57,6 +42,11 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
   }, {
+    classMethods: {
+      associate(models) {
+        // associations can be defined here
+      },
+    },
   });
   return users;
 };

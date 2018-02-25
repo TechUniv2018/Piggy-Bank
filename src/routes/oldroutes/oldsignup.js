@@ -1,6 +1,6 @@
-const Models = require('../../models');
+const Models = require('../../../models');
 const BaseJoi = require('joi');
-const generateHash = require('../helpers/generateHash');
+const generateHash = require('../../helpers/generateHash');
 const Extension = require('joi-date-extensions');
 
 const Joi = BaseJoi.extend(Extension);
@@ -8,7 +8,7 @@ const Joi = BaseJoi.extend(Extension);
 module.exports = [
   {
     method: 'POST',
-    path: '/users',
+    path: '/oldusers',
     config: {
       handler: (request, response) => {
         const createUserObject = {};

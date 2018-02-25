@@ -1,4 +1,4 @@
-const getCurrentBalance = require('../../source/helpers/getCurrentBalance');
+const getCurrentBalance = require('../../src/helpers/getCurrentBalance');
 const Joi = require('joi');
 const Models = require('../../models');
 

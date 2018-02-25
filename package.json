@@ -5,7 +5,7 @@
   "main": "./source/server.js",
   "scripts": {
     "test": "NODE_ENV=test sequelize db:migrate:undo:all &&  NODE_ENV=test sequelize db:migrate && jest --coverage --notify --forceExit .",
-    "start": "sequelize db:migrate:undo:all &&  sequelize db:migrate && sequelize db:seed:all && nodemon ./source/server.js"
+    "start": "sequelize db:migrate:undo:all &&  sequelize db:migrate && sequelize db:seed:all && nodemon ./src/server.js"
   },
   "repository": {
     "type": "git",
@@ -29,11 +29,14 @@
   },
   "dependencies": {
     "bcrypt": "^1.0.3",
+    "boom": "^7.1.1",
     "handlebars": "^4.0.11",
     "hapi": "^16.6.2",
     "inert": "^5.1.0",
     "joi": "^13.1.2",
     "joi-date-extensions": "^1.1.1",
+    "joi-phone-validator": "^1.0.0",
+    "jsonwebtoken": "^8.1.1",
     "node-fetch": "^2.0.0",
     "pg": "^7.4.1",
     "request-promise": "^4.2.2",

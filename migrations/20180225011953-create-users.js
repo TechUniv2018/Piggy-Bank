@@ -8,52 +8,39 @@ module.exports = {
       primaryKey: true,
       type: Sequelize.INTEGER,
     },
-    phone_number: {
-      type: Sequelize.TEXT,
+    phoneNumber: {
       allowNull: false,
-      unique: true,
-      defaultValue: null,
+      type: Sequelize.STRING,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    userName: {
+      allowNull: false,
+      type: Sequelize.STRING,
       validate: {
         notEmpty: true,
       },
     },
     password: {
-      type: Sequelize.STRING,
       allowNull: false,
-      validate: {
-        notEmpty: true,
-      },
-    },
-    user_name: {
       type: Sequelize.STRING,
-      allowNull: false,
       validate: {
         notEmpty: true,
       },
     },
     aadhar: {
       type: Sequelize.STRING,
-      defaultValue: null,
-      validate: {
-        notEmpty: true,
-      },
       unique: true,
     },
     email: {
       type: Sequelize.STRING,
-      defaultValue: null,
-      validate: {
-        notEmpty: true,
-        isEmail: true,
-        len: [1, 255],
-      },
+      unique: true,
     },
     kyc: {
       type: Sequelize.BOOLEAN,
-      allowNull: false,
-      defaultValue: false,
     },
-    account_id: {
+    accountId: {
       type: Sequelize.STRING,
       allowNull: false,
       unique: true,
