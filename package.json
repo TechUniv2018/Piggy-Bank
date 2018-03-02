@@ -32,6 +32,8 @@
     "boom": "^7.1.1",
     "handlebars": "^4.0.11",
     "hapi": "^16.6.2",
+    "hapi-auth-jwt2": "^7.4.1",
+    "hapi-swagger": "^9.1.1",
     "inert": "^5.1.0",
     "joi": "^13.1.2",
     "joi-date-extensions": "^1.1.1",

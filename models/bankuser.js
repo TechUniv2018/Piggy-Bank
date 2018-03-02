@@ -18,28 +18,32 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
     },
     firstName: {
-      allowNull: false,
+      // allowNull: false,
+      defaultValue: null,
       type: DataTypes.STRING,
       validate: {
         notEmpty: true,
       },
     },
     lastName: {
-      allowNull: false,
+      // allowNull: false,
+      defaultValue: null,
       type: DataTypes.STRING,
       validate: {
         notEmpty: true,
       },
     },
     fatherName: {
-      allowNull: false,
+      // allowNull: false,
+      defaultValue: null,
       type: DataTypes.STRING,
       validate: {
         notEmpty: true,
       },
     },
     email: {
-      allowNull: false,
+      // allowNull: false,
+      defaultValue: null,
       type: DataTypes.STRING,
       validate: {
         notEmpty: true,
@@ -48,14 +52,16 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     dob: {
-      allowNull: false,
+      // allowNull: false,
+      defaultValue: null,
       type: DataTypes.DATE,
       validate: {
         notEmpty: true,
       },
     },
     phoneNumber: {
-      allowNull: false,
+      defaultValue: null,
+      // allowNull: false,
       type: DataTypes.STRING,
       validate: {
         notEmpty: true,
@@ -63,14 +69,16 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     gender: {
-      allowNull: false,
+      defaultValue: null,
+      //  allowNull: false,
       type: DataTypes.STRING,
       validate: {
         notEmpty: true,
       },
     },
     panCardNumber: {
-      allowNull: false,
+      defaultValue: null,
+      // allowNull: false,
       type: DataTypes.STRING,
       validate: {
         notEmpty: true,
@@ -80,14 +88,15 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
     },
     address: {
-      allowNull: false,
+    //  allowNull: false,
+      defaultValue: null,
       type: DataTypes.STRING,
       validate: {
         notEmpty: true,
       },
     },
     aadharNumber: {
-      allowNull: false,
+      // allowNull: false,
       type: DataTypes.STRING,
       validate: {
         notEmpty: true,

@@ -24,42 +24,48 @@ module.exports = {
       type: Sequelize.STRING,
     },
     firstName: {
-      allowNull: false,
+    //  allowNull: false,
+      defaultValue: null,
       type: Sequelize.STRING,
       validate: {
         notEmpty: true,
       },
     },
     lastName: {
-      allowNull: false,
+      // allowNull: false,
+      defaultValue: null,
       type: Sequelize.STRING,
       validate: {
         notEmpty: true,
       },
     },
     fatherName: {
-      allowNull: false,
+    //  allowNull: false,
+      defaultValue: null,
       type: Sequelize.STRING,
       validate: {
         notEmpty: true,
       },
     },
     email: {
-      allowNull: false,
+      // allowNull: false,
+      defaultValue: null,
       type: Sequelize.STRING,
       validate: {
         notEmpty: true,
       },
     },
     dob: {
-      allowNull: false,
+      // allowNull: false,
+      defaultValue: null,
       type: Sequelize.DATE,
       validate: {
         notEmpty: true,
       },
     },
     phoneNumber: {
-      allowNull: false,
+      // allowNull: false,
+      defaultValue: null,
       type: Sequelize.STRING,
       validate: {
         notEmpty: true,
@@ -67,14 +73,16 @@ module.exports = {
       },
     },
     gender: {
-      allowNull: false,
+      // allowNull: false,
+      defaultValue: null,
       type: Sequelize.STRING,
       validate: {
         notEmpty: true,
       },
     },
     panCardNumber: {
-      allowNull: false,
+      // allowNull: false,
+      defaultValue: null,
       type: Sequelize.STRING,
       validate: {
         notEmpty: true,
@@ -82,18 +90,19 @@ module.exports = {
       },
     },
     user_pic: {
-      allowNull: true,
+      // allowNull: true,
+      defaultValue: null,
       type: Sequelize.STRING,
     },
     address: {
-      allowNull: false,
+      // allowNull: false,
       type: Sequelize.STRING,
       validate: {
         notEmpty: true,
       },
     },
     aadharNumber: {
-      allowNull: false,
+    //  allowNull: false,
       type: Sequelize.STRING,
       validate: {
         notEmpty: true,
@@ -108,5 +117,5 @@ module.exports = {
       type: Sequelize.DATE,
     },
   }),
-  down: (queryInterface, Sequelize) => queryInterface.dropTable('bankusers'),
+  down: queryInterface => queryInterface.dropTable('bankusers'),
 };

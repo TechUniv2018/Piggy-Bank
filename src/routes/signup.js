@@ -2,9 +2,6 @@ const Model = require('../../models');
 const generateHash = require('../helpers/generateHash');
 const Boom = require('boom');
 
-const ID = function () {
-  return `_${Math.random().toString(36).substr(2, 9)}`;
-};
 const registerPayloadValidation = require('../validations/userRegister');
 
 const route = [{
@@ -21,33 +18,29 @@ const route = [{
   },
   handler: (request, reply) => {
     const {
-      phoneNumber,
       userName,
       password,
     } = request.payload;
 
-    Model.users.findOne({
+    Model.bankusers.findOne({
       where: {
-        phoneNumber,
+        userName,
       },
     }).then((user) => {
       console.log(user);
-      if (user && user.phoneNumber === phoneNumber) {
-        throw Boom.badRequest('Phone number taken');
+      if (user && user.userName === userName) {
+        throw Boom.badRequest('userName taken');
       }
     }).then(() => {
-      console.log('hELLO');
       generateHash(password, 10).then((hash) => {
-        Model.users.create({
-          phoneNumber,
+        Model.bankusers.create({
           userName,
           password: hash,
-          accountId: ID(),
         });
       });
     }).then(() => {
       reply({
-        statusCode: 201,
+        statusCode: 200,
         error: '',
         message: 'User successfully created',
       });

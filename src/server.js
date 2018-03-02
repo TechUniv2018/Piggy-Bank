@@ -1,7 +1,8 @@
 const Hapi = require('hapi');
-const Vision = require('vision');
 const routes = require('./routes');
-const handle = require('handlebars');
+const Jwt = require('hapi-auth-jwt2');
+const secret = require('./secret');
+const validate = require('./validate');
 
 const server = new Hapi.Server();
 let portNo;
@@ -15,11 +16,25 @@ server.connection({
   host: 'localhost',
 });
 
-server.register(Vision, (err) => {
-  if (err) throw err;
+
+server.register([
+  Jwt,
+], (err) => {
+  if (err) {
+    throw err;
+  }
 });
 
-server.views({ engines: { html: handle }, path: 'source/views/html/', isCached: false });
+server.auth.strategy('jwt', 'jwt', {
+  key: secret.secret,
+  validateFunc: validate,
+  verifyOptions: {
+    algorithms: ['HS256'],
+  },
+});
+
+server.auth.default('jwt');
+
 
 server.route(routes);
 

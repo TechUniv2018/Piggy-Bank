@@ -14,6 +14,7 @@ module.exports = {
       validate: {
         notEmpty: true,
       },
+      unique: true,
     },
     userName: {
       allowNull: false,
