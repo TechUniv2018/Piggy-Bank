@@ -1,61 +1,38 @@
 
-const Joi = require('joi');
 const Models = require('../../models');
-const fetch = require('node-fetch');
+const tranferPayloadValidation = require('./../validations/transfer');
+const headerValidation = require('./../validations/header');
+const sequelize = require('sequelize');
 
 module.exports = [
   {
     method: 'POST',
     path: '/transfer',
     config: {
+      auth: 'jwt',
+      tags: ['api'],
+      description: 'transfer money',
+      notes: 'transfer moeny',
       validate: {
-        payload: {
-          amount: Joi.number().min(100).max(20000).required(),
-          fromAccountNumber: Joi.string().required(),
-          toAccountNumber: Joi.string().required(),
-        },
+        payload: tranferPayloadValidation,
+        headers: headerValidation,
       },
     },
     handler: (request, response) => {
       const { amount } = request.payload;
-      const { fromAccountNumber } = request.payload;
-      const { toAccountNumber } = request.payload;
-      fetch('http://localhost:8080/money?action=withdrawal', {
-        method: 'POST',
-        body: JSON.stringify({ accountNumber: fromAccountNumber, amount }),
-      })
-        .then(resultWithdrawal => resultWithdrawal.json())
-        .then((responseObj) => {
-          if (responseObj.status_code === 201) {
-            fetch('http://localhost:8080/money?action=deposit', {
-              method: 'POST',
-              body: JSON.stringify({ accountNumber: toAccountNumber, amount }),
-            }).then(result => result.json())
-              .then((result) => {
-                if (result.status_code === 201) {
-                  Models.transactions.create({
-                    transactionId: `${fromAccountNumber}_${toAccountNumber}_T_${new Date()}`,
-                    transactionStatus: 'complete',
-                    toAccount: toAccountNumber,
-                    fromAccount: fromAccountNumber,
-                    transactionType: 'transfer',
-                    transactionTimestamp: new Date(),
-                    amount,
-                    createdAt: new Date(),
-                    updatedAt: new Date(),
-                  }).then(() => {
-                    response({ message: `${amount} rupees transfered from account ${fromAccountNumber} to ${toAccountNumber}`, status_code: 201 });
-                  });
-                } else {
-                  response({ message: 'Invalid account number', status_code: 401 });
-                }
-              }).catch((error) => {
-                response({ message: error.message, status_code: 500 });
-              });
-          } else response({ message: 'Invalid account number or transfer amount', status_code: 500 });
-        }).catch((error) => {
-          response({ message: error.message, status_code: 500 });
-        });
+      const userId = request.auth.credentials.userid;
+      const { touserId } = request.payload;
+      sequelize.transaction().then(t => sequelize.Promise.all([
+        Project.create({
+          title: 'my awesome project',
+          description: 'woot woot. this will make me a rich man',
+        }, { transaction: t }),
+        Task.build({
+          title: 'specify the project idea',
+          description: 'bla',
+          deadline: new Date(),
+        }, { transaction: t }),
+      ]).then((project, task) => t.commit(), err => t.rollback()));
     },
   },
 ];

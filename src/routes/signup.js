@@ -32,10 +32,19 @@ const route = [{
         throw Boom.badRequest('userName taken');
       }
     }).then(() => {
+      const id = `${userName}_${new Date()}`;
       generateHash(password, 10).then((hash) => {
         Model.bankusers.create({
           userName,
           password: hash,
+          userId: id,
+        }).then(() => {
+          Model.accounts.create({
+            userId: id,
+            currentBalance: 0,
+            accountType: 'Savings',
+
+          });
         });
       });
     }).then(() => {

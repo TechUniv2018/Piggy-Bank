@@ -14,6 +14,12 @@ module.exports = {
         len: [1, 50],
       },
       type: Sequelize.STRING,
+    },
+    userId: {
+      type: Sequelize.STRING,
+      validate: {
+        notEmpty: true,
+      },
       unique: true,
     },
     password: {

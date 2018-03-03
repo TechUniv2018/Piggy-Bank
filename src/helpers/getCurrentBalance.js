@@ -1,7 +1,7 @@
 const Models = require('../../models');
 
-module.exports = accountNumber =>
+module.exports = userId =>
   Models.accounts.findAll({
-    where: { accountNumber },
+    where: { userId },
   });
 

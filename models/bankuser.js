@@ -10,6 +10,13 @@ module.exports = (sequelize, DataTypes) => {
         len: [1, 50],
       },
     },
+    userId: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: true,
+      },
+      unique: true,
+    },
     password: {
       allowNull: false,
       validate: {
@@ -105,7 +112,7 @@ module.exports = (sequelize, DataTypes) => {
 
   }, {
     classMethods: {
-      associate(models) {
+      associate() {
         // associations can be defined here
       },
     },

@@ -1,12 +1,23 @@
 const Models = require('../../models');
+const headerValidation = require('../validations/header');
 
 module.exports = [
   {
     method: 'PUT',
     path: '/users',
+    config: {
+      auth: 'jwt',
+      tags: ['api'],
+      description: 'update account details for current user',
+      notes: 'update account details for current user',
+      validate: {
+        headers: headerValidation,
+      },
+    },
     handler: (request, response) => {
       const updateObject = request.payload;
-      const username = request.payload.userName;
+      const userName = request.auth.credentials.username;
+      console.log(userName);
       delete updateObject.userName;
       console.log(request.payload);
       const propNames = Object.getOwnPropertyNames(updateObject);
@@ -18,7 +29,7 @@ module.exports = [
       }
       Models.bankusers.update(updateObject, {
         where: {
-          userName: username,
+          userName,
         },
       }).then((result) => {
         response({

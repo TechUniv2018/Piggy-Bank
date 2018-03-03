@@ -1,12 +1,23 @@
 const Models = require('../../models');
 const strftime = require('strftime');
+const headerValidation = require('../validations/header');
 
 module.exports = [
   {
     method: 'GET',
     path: '/user/details',
+    config: {
+      auth: 'jwt',
+      tags: ['api'],
+      description: 'Get user details for current user',
+      notes: 'Get user details for current user',
+      validate: {
+        headers: headerValidation,
+      },
+    },
     handler: (request, response) => {
-      Models.bankusers.findOne({ where: { userName: request.headers.username } })
+      const userName = request.auth.credentials.username;
+      Models.bankusers.findAll({ where: { userName } })
         .then((result) => {
           if (result === null) {
             const resultObject = { statusCode: 401, message: 'No such user exists' };

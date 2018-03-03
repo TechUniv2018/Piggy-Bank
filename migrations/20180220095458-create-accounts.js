@@ -8,9 +8,10 @@ module.exports = {
       primaryKey: true,
       type: Sequelize.INTEGER,
     },
-    accountNumber: {
+    userId: {
       allowNull: false,
       type: Sequelize.STRING,
+      references: { model: 'bankusers', key: 'userId' },
     },
     currentBalance: {
       allowNull: false,
@@ -23,11 +24,6 @@ module.exports = {
     },
     dateClosed: {
       type: Sequelize.DATE,
-    },
-    userName: {
-      type: Sequelize.STRING,
-      unique: true,
-      references: { model: 'bankusers', key: 'userName' },
     },
     createdAt: {
       allowNull: false,

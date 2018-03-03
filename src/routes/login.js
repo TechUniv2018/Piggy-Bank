@@ -10,6 +10,7 @@ const loginPayloadValidation = require('../validations/userLogin');
 function createToken(user) {
   return Jwt.sign({
     username: user.userName,
+    userid: user.userId,
   }, secret.secret, {
     algorithm: 'HS256',
     expiresIn: '1h',

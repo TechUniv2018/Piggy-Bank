@@ -30,14 +30,14 @@ module.exports = {
       },
     },
     fromAccount: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.STRING,
       allowNull: false,
       validate: {
         notEmpty: true,
       },
     },
     toAccount: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.STRING,
       allowNull: false,
       validate: {
         notEmpty: true,
