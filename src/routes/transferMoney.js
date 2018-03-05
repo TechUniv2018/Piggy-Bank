@@ -13,7 +13,7 @@ module.exports = [
       auth: 'jwt',
       tags: ['api'],
       description: 'transfer money',
-      notes: 'transfer moeny',
+      notes: 'transfer money',
       validate: {
         payload: tranferPayloadValidation,
         headers: headerValidation,
@@ -23,38 +23,30 @@ module.exports = [
       const { amount } = request.payload;
       const userId = request.auth.credentials.userid;
       const { touserId } = request.payload;
-      console.log('Hello', touserId);
-      Models.sequelize.transaction(() => {
-        getCurrentBalance(userId).then((resp) => {
-          let balance = 0;
-          balance = JSON.parse(JSON.stringify(resp))[0].currentBalance;
-          if (amount <= balance) {
+      const userIdPromise = getCurrentBalance(userId);
+      const touserIdPromise = getCurrentBalance(touserId);
+      Promise.all([userIdPromise, touserIdPromise]).then(([userIdResponse, touserIdResponse]) => {
+        const withdrawbalance = JSON.parse(JSON.stringify(userIdResponse))[0].currentBalance;
+        const depositbalance = JSON.parse(JSON.stringify(touserIdResponse))[0].currentBalance;
+        if (amount <= withdrawbalance && amount <= 2147483647 - depositbalance) {
+          Models.sequelize.transaction(t =>
             Models.accounts.update({
-              currentBalance: +balance - +amount,
-            }, { where: { userId } }).then(() => {
-              getCurrentBalance(touserId).then((resp1) => {
-                balance = 0;
-                console.log(resp1);
-                balance = JSON.parse(JSON.stringify(resp1))[0].currentBalance;
-                if (amount <= 2147483647 - balance) {
-                  Models.accounts.update({
-                    currentBalance: +balance + +amount,
-                  }, { where: { userId: touserId } }).then(() => {
-                    enterTransaction(userId, touserId, amount, 'complete', 'transfer');
-                  });
-                }
-              }).then(() => {
-              });
-            });
-          }
-        });
-      })
-        .then(() => {
-          response({ statusCode: 201, message: 'transaction added' });
-        }).catch(() => {
+              currentBalance: +withdrawbalance - +amount,
+            }, { where: { userId } }, { transaction: t }).then(() =>
+              Models.accounts.update({
+                currentBalance: +depositbalance + +amount,
+              }, { where: { userId: touserId } }, { transaction: t }))).then(() => {
+            response({ message: 'Transfer done', status_code: 201 });
+            enterTransaction(userId, touserId, amount, 'complete', 'transfer');
+          }).catch((err) => {
+            enterTransaction(userId, touserId, amount, 'failed', 'transfer');
+            response({ message: err.message, status_code: 500 });
+          });
+        } else {
           enterTransaction(userId, touserId, amount, 'failed', 'transfer');
-          response({ statusCode: 500, message: 'Database error' });
-        });
+          response({ message: 'Transfer failed', status_code: 401 });
+        }
+      });
     },
   },
 ];
