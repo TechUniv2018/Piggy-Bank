@@ -20,6 +20,8 @@ const route = [{
     const {
       userName,
       password,
+      aadhaarNo,
+      isVerified,
     } = request.payload;
 
     Model.bankusers.findOne({
@@ -29,34 +31,29 @@ const route = [{
     }).then((user) => {
       console.log(user);
       if (user && user.userName === userName) {
-        throw Boom.badRequest('userName taken');
+        return reply({ statusCode: 400, message: 'user name taken' });
+      } else if (isVerified === false) {
+        return reply({ statusCode: 422, message: 'Visit your nearest aadhaar centre and get your details verified' });
       }
-    }).then(() => {
       const id = `${userName}_${new Date()}`;
-      generateHash(password, 10).then((hash) => {
+      return generateHash(password, 10).then((hash) => {
         Model.bankusers.create({
           userName,
           password: hash,
           userId: id,
-        }).then(() => {
-          Model.accounts.create({
-            userId: id,
-            currentBalance: 0,
-            accountType: 'Savings',
-
-          });
-        });
+        }).then(() => Model.accounts.create({
+          userId: id,
+          currentBalance: 0,
+          accountType: 'Savings',
+        }).then(() =>
+          Model.user_token.update({ isVerified: true }, { where: { aadhaar_id: aadhaarNo } })));
       });
-    }).then(() => {
-      reply({
-        statusCode: 200,
-        error: '',
-        message: 'User successfully created',
-      });
-    })
-      .catch((err) => {
-        reply(err);
-      });
+    }).then(() => reply({
+      statusCode: 200,
+      error: '',
+      message: 'User successfully created',
+    }))
+      .catch(err => reply({ statusCode: 500, message: err.message }));
   },
 },
 ];

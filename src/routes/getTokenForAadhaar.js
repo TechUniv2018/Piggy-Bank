@@ -21,11 +21,16 @@ module.exports = [
             json: true,
           };
           return rp(options)
-            .then(parsedBody => Models.user_token.upsert({
-              aadhaar_id: request.payload.aadhaarNo,
-              token: parsedBody.verificationToken,
-              isVerified: false,
-            })).then(() => reply({ statusCode: 200, message: 'OTP sent to registered mobile number' }))
+            .then((parsedBody) => {
+              if (parsedBody.statusCode === 204) {
+                return reply({ statusCode: 204, message: 'Aadhaar number doesnot exists' });
+              }
+              return Models.user_token.upsert({
+                aadhaar_id: request.payload.aadhaarNo,
+                token: parsedBody.verificationToken,
+                isVerified: false,
+              });
+            }).then(() => reply({ statusCode: 200, message: 'OTP sent to registered mobile number' }))
             .catch(err => reply({ statusCode: 500, message: err.message }));
         }
         return reply({ statusCode: 400, message: 'User already registered' });
