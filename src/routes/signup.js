@@ -30,7 +30,6 @@ const route = [{
             userName,
           },
         }).then((user) => {
-          console.log(user);
           if (user && user.userName === userName) {
             return reply({ statusCode: 400, message: 'Username is taken' });
           } else if (isVerified.toString() === 'false') {
@@ -46,12 +45,15 @@ const route = [{
             currentBalance: 0,
             accountType: 'Savings',
           }).then(() =>
-            Model.user_token.update({ isVerified: true }, { where: { aadhaar_id: aadhaarNo } }))));
-        }).then(() => reply({
-          statusCode: 200,
-          error: '',
-          message: 'User successfully created',
-        }));
+            Model.user_token.update(
+              { isVerified: true },
+              { where: { aadhaar_id: aadhaarNo } },
+            )).then(() => reply({
+            statusCode: 200,
+            error: '',
+            message: 'User successfully created',
+          }))));
+        });
       }
       return reply({ statusCode: 404, message: 'OTP has not been verified yet' });
     }).catch(err => reply({ statusCode: 500, message: err.message }));
