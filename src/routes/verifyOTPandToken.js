@@ -32,7 +32,8 @@ module.exports = [
             if (parsedBody.user_id === null) {
               return reply({ statusCode: 400, message: 'Authentication failed' });
             }
-            return reply({ statusCode: 200, response: parsedBody });
+            return Models.user_token.update({ token: '' }, { where: { aadhaar_id: request.payload.aadhaarNo } })
+              .then(() => reply({ statusCode: 200, response: parsedBody }));
           }).catch(err => reply({ statusCode: 500, message: err.message }));
       }),
       validate: {
