@@ -35,26 +35,20 @@ const route = [{
       password,
       userName,
     } = request.payload;
-
-    Model.bankusers.findOne({
+    return Model.bankusers.findOne({
       where: {
         userName,
       },
     })
-      .then((user) => {
-        verifyPassword(password, user.password).then((isTrue) => {
-          if (isTrue) {
-            reply({
-              statusCode: 201,
-              message: 'Logged In',
-            }).header('token', createToken(user));
-          } else {
-            reply(Boom.badRequest('Please check password')).header('token', null);
-          }
-        });
-      }).catch(() => {
-        reply(Boom.badRequest('Please check user name')).header('token', null);
-      });
+      .then(user => verifyPassword(password, user.password).then((isTrue) => {
+        if (isTrue) {
+          return reply({
+            statusCode: 201,
+            message: 'Logged In',
+          }).header('token', createToken(user));
+        }
+        return reply(Boom.badRequest('Please check password')).header('token', null);
+      })).catch(() => reply(Boom.badRequest('Please check user name')).header('token', null));
   },
 },
 ];
