@@ -37,6 +37,12 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: true,
       },
     },
+    toRemainigBalance: {
+      type: DataTypes.INTEGER,
+    },
+    fromRemainingBalance: {
+      type: DataTypes.INTEGER,
+    },
     amount: {
       type: DataTypes.INTEGER,
       allowNull: false,

@@ -35,7 +35,6 @@ const route = [{
       password,
       userName,
     } = request.payload;
-
     Model.bankusers.findOne({
       where: {
         userName,
