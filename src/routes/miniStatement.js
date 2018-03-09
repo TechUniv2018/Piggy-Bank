@@ -27,7 +27,6 @@ module.exports = [
         attributes: ['toAccount', 'fromRemainingBalance', 'amount', 'transactionTimestamp'],
         limit: 10,
       }).then((result) => {
-      //  console.log(result);
         if (result === null) {
           const resultObject = { message: 'No transactions' };
           return response(resultObject);
