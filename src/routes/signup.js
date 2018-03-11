@@ -22,6 +22,7 @@ const route = [{
       password,
       aadhaarNo,
       isVerified,
+      eKYCResponse,
     } = request.payload;
     Model.user_token.findOne({ where: { token: '', aadhaar_id: aadhaarNo, isVerified: false } }).then((findVerifiedToken) => {
       if (findVerifiedToken) {
@@ -35,7 +36,8 @@ const route = [{
           } else if (isVerified.toString() === 'false') {
             return reply({ statusCode: 422, message: 'Visit your nearest aadhaar centre and get your details verified' });
           }
-          const id = `${userName}_${new Date()}`;
+          const id = `${userName}`;
+          console.log(JSON.parse(eKYCResponse));
           return generateHash(password, 10).then(hash => Model.bankusers.create({
             userName,
             password: hash,

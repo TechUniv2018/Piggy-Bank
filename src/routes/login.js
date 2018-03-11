@@ -4,9 +4,6 @@ const Boom = require('boom');
 const secret = require('../secret');
 const verifyPassword = require('../helpers/verifyPassword');
 
-const loginPayloadValidation = require('../validations/userLogin');
-
-
 function createToken(user) {
   return Jwt.sign({
     username: user.userName,
@@ -25,9 +22,6 @@ const route = [{
     tags: ['api'],
     description: 'Log user in',
     notes: 'log user in',
-    validate: {
-      payload: loginPayloadValidation,
-    },
     auth: false,
   },
   handler: (request, reply) => {
