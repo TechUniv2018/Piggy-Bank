@@ -4,9 +4,6 @@ const Boom = require('boom');
 const secret = require('../secret');
 const verifyPassword = require('../helpers/verifyPassword');
 
-const loginPayloadValidation = require('../validations/userLogin');
-
-
 function createToken(user) {
   return Jwt.sign({
     username: user.userName,
@@ -25,9 +22,6 @@ const route = [{
     tags: ['api'],
     description: 'Log user in',
     notes: 'log user in',
-    validate: {
-      payload: loginPayloadValidation,
-    },
     auth: false,
   },
   handler: (request, reply) => {
@@ -40,20 +34,23 @@ const route = [{
         userName,
       },
     })
-      .then((user) => {
-        verifyPassword(password, user.password).then((isTrue) => {
-          if (isTrue) {
+      .then(user => verifyPassword(password, user.password).then((isTrue) => {
+        if (isTrue) {
+          return Model.accounts.findOne({
+            where: {
+              userId: user.userId,
+            },
+          }).then((account) => {
+            const balance = account.currentBalance;
             reply({
               statusCode: 201,
               message: 'Logged In',
+              data: balance,
             }).header('token', createToken(user));
-          } else {
-            reply(Boom.badRequest('Please check password')).header('token', null);
-          }
-        });
-      }).catch(() => {
-        reply(Boom.badRequest('Please check user name')).header('token', null);
-      });
+          });
+        }
+        return reply(Boom.badRequest('Please check password')).header('token', null);
+      })).catch(() => reply(Boom.badRequest('Please check user name')).header('token', null));
   },
 },
 ];
