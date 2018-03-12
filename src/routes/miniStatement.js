@@ -1,10 +1,13 @@
 const Models = require('../../models');
+const Sequelize = require('sequelize');
+
+const { Op } = Sequelize;
 
 const headerValidation = require('../validations/header');
 
 module.exports = [
   {
-    method: 'GET',
+    method: 'POST',
     path: '/user/miniStatement',
     config: {
       auth: 'jwt',
@@ -20,18 +23,50 @@ module.exports = [
       console.log(userid);
       Models.transactions.findAll({
         where: {
-          fromAccount: userid,
+          [Op.or]: [{ fromAccount: userid }, { toAccount: userid }],
           transactionStatus: 'complete',
-          transactionType: 'transfer',
         },
-        attributes: ['toAccount', 'fromRemainingBalance', 'amount', 'transactionTimestamp'],
+        attributes: ['toAccount', 'fromAccount', 'fromRemainingBalance', 'toRemainigBalance', 'amount', 'transactionTimestamp'],
         limit: 10,
       }).then((result) => {
         if (result === null) {
           const resultObject = { message: 'No transactions' };
           return response(resultObject);
         }
-        return response(result);
+        console.log('1');
+
+        const allEntries = result.map((eachEntry) => {
+          const {
+            toAccount,
+            fromAccount,
+            fromRemainingBalance,
+            toRemainigBalance,
+            amount,
+            transactionTimestamp,
+          } = eachEntry;
+
+          let eachTransaction = {};
+
+          if (fromAccount === userid) {
+            eachTransaction = {
+              account: toAccount,
+              balance: fromRemainingBalance,
+              amount,
+              type: 'Debit',
+              transactionTimestamp,
+            };
+          } else {
+            eachTransaction = {
+              account: fromAccount,
+              balance: toRemainigBalance,
+              amount,
+              type: 'Credit',
+              transactionTimestamp,
+            };
+          }
+          return eachTransaction;
+        });
+        return response(allEntries);
       }).catch((err) => {
         response(err.message);
       });

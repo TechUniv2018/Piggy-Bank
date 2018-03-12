@@ -1,4 +1,3 @@
-
 const Models = require('../../models');
 const tranferPayloadValidation = require('./../validations/transfer');
 const headerValidation = require('./../validations/header');
@@ -50,10 +49,10 @@ module.exports = [
                       Models.accounts.update({
                         currentBalance: +depositbalance + +amount,
                       }, { where: { userId: touserId } }, { transaction: t }))).then(() => {
-                    response({ message: 'Transfer done', status_code: 201 });
                     const toRemainingBalance = +depositbalance + +amount;
                     const fromRemainingBalance = +withdrawbalance - +amount;
                     enterTransaction(userId, touserId, fromRemainingBalance, toRemainingBalance, amount, 'complete', 'transfer');
+                    response({ message: 'Transfer done', status_code: 201, balance: fromRemainingBalance });
                   }).catch((err) => {
                     enterTransaction(userId, touserId, 0, 0, amount, 'failed', 'transfer');
                     response({ message: err.message, status_code: 500 });
@@ -63,6 +62,8 @@ module.exports = [
                   response({ message: 'Transfer failed', status_code: 401 });
                 }
               });
+            } else {
+              response({ message: 'Provide correct password', status_code: 404 });
             }
           });
         }).catch(() => {
@@ -71,4 +72,3 @@ module.exports = [
     },
   },
 ];
-
