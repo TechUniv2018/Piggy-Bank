@@ -10,6 +10,7 @@ const registerPayloadValidation = Joi.object({
     .required(),
   aadhaarNo: Joi.string().regex(/^[1-9]{1}[0-9]{11}$/).required(),
   isVerified: Joi.string().regex(/^(true|false)$/i).required(),
+  eKYCResponse: Joi.string().required(),
 });
 
 module.exports = registerPayloadValidation;

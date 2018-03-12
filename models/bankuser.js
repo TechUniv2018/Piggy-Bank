@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       type: DataTypes.STRING,
     },
-    firstName: {
+    name: {
       // allowNull: false,
       defaultValue: null,
       type: DataTypes.STRING,
@@ -32,30 +32,12 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: true,
       },
     },
-    lastName: {
+    gender: {
       // allowNull: false,
       defaultValue: null,
       type: DataTypes.STRING,
       validate: {
         notEmpty: true,
-      },
-    },
-    fatherName: {
-      // allowNull: false,
-      defaultValue: null,
-      type: DataTypes.STRING,
-      validate: {
-        notEmpty: true,
-      },
-    },
-    email: {
-      // allowNull: false,
-      defaultValue: null,
-      type: DataTypes.STRING,
-      validate: {
-        notEmpty: true,
-        isEmail: true,
-        len: [1, 255],
       },
     },
     dob: {
@@ -66,33 +48,13 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: true,
       },
     },
-    phoneNumber: {
-      defaultValue: null,
+    contact: {
       // allowNull: false,
-      type: DataTypes.STRING,
-      validate: {
-        notEmpty: true,
-        len: 10,
-      },
-    },
-    gender: {
       defaultValue: null,
-      //  allowNull: false,
       type: DataTypes.STRING,
       validate: {
         notEmpty: true,
       },
-    },
-    panCardNumber: {
-      defaultValue: null,
-      // allowNull: false,
-      type: DataTypes.STRING,
-      validate: {
-        notEmpty: true,
-      },
-    },
-    user_pic: {
-      type: DataTypes.STRING,
     },
     address: {
     //  allowNull: false,
