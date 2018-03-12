@@ -1,7 +1,6 @@
 const Model = require('../../models');
 const generateHash = require('../helpers/generateHash');
-const Boom = require('boom');
-
+const strftime = require('strftime');
 const registerPayloadValidation = require('../validations/userRegister');
 
 const route = [{
@@ -38,13 +37,26 @@ const route = [{
           }
           const id = `${userName}`;
           console.log(JSON.parse(eKYCResponse));
+          const KYCResponse = JSON.parse(eKYCResponse);
+          const name = KYCResponse.e_Kyc.Poi.Name;
+          const gender = KYCResponse.e_Kyc.Poi.Gender;
+          const dob = strftime('%F', new Date(KYCResponse.e_Kyc.Poi.Dob));
+          const { contact } = KYCResponse.e_Kyc.Poi;
+          const address = `${KYCResponse.e_Kyc.Poa.house}${KYCResponse.e_Kyc.Poa.street}, 
+          ${KYCResponse.e_Kyc.Poa.dist}${KYCResponse.e_Kyc.Poa.pc}${KYCResponse.e_Kyc.Poa.state}`;
           return generateHash(password, 10).then(hash => Model.bankusers.create({
             userName,
             password: hash,
             userId: id,
+            name,
+            dob,
+            gender,
+            contact,
+            address,
+            aadharNumber: aadhaarNo,
           }).then(() => Model.accounts.create({
             userId: id,
-            currentBalance: 0,
+            currentBalance: 5000,
             accountType: 'Savings',
           }).then(() =>
             Model.user_token.update(

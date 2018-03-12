@@ -36,10 +36,18 @@ const route = [{
     })
       .then(user => verifyPassword(password, user.password).then((isTrue) => {
         if (isTrue) {
-          return reply({
-            statusCode: 201,
-            message: 'Logged In',
-          }).header('token', createToken(user));
+          return Model.accounts.findOne({
+            where: {
+              userId: user.userId,
+            },
+          }).then((account) => {
+            const balance = account.currentBalance;
+            reply({
+              statusCode: 201,
+              message: 'Logged In',
+              data: balance,
+            }).header('token', createToken(user));
+          });
         }
         return reply(Boom.badRequest('Please check password')).header('token', null);
       })).catch(() => reply(Boom.badRequest('Please check user name')).header('token', null));
