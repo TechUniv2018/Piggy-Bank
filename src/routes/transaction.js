@@ -33,7 +33,7 @@ module.exports = [
               Models.accounts.update({
                 currentBalance: +balance + +amount,
               }, { where: { userId } }).then(() => {
-                enterTransaction(userId, userId, amount, 'complete', 'credit')
+                enterTransaction(userId, userId, 0, 0, amount, 'complete', 'credit')
                   .then(() => {
                     response({ message: `${amount} rupees is added to your account. New bbalance is ${amount + balance}`, status_code: 201 });
                   });
@@ -42,7 +42,7 @@ module.exports = [
                 status_code: 500,
               }));
             } else {
-              enterTransaction(userId, userId, amount, 'failed', 'credit').then(() => {
+              enterTransaction(userId, userId, 0, 0, amount, 'failed', 'credit').then(() => {
                 response({ message: 'OOPS, deposit transaction failed', status_code: 500 });
               });
             }
@@ -63,7 +63,7 @@ module.exports = [
               Models.accounts.update({
                 currentBalance: +balance - +amount,
               }, { where: { userId } }).then(() => {
-                enterTransaction(userId, userId, amount, 'complete', 'debit').then(() => {
+                enterTransaction(userId, userId, 0, 0, amount, 'complete', 'debit').then(() => {
                   response({ message: `${amount} withdrawed from your account. New balance is ${balance - amount}`, status_code: 201 });
                 });
               }).catch(error => ({
@@ -71,7 +71,7 @@ module.exports = [
                 status_code: 500,
               }));
             } else {
-              enterTransaction(userId, userId, amount, 'failed', 'debit').then(() => {
+              enterTransaction(userId, userId, 0, 0, amount, 'failed', 'debit').then(() => {
                 response({ message: 'OOPS, withdraw transaction failed', status_code: 500 });
               });
             }

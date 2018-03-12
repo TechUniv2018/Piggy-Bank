@@ -1,12 +1,14 @@
 const Models = require('../../models');
 
-module.exports = (fromuserId, touserId, amount, status, type) =>
+module.exports = (fromuserId, touserId, fromRemainingBalance, toRemainigBalance, amount, status, type) =>
 
   Models.transactions.create({
     transactionId: `${fromuserId}_${touserId}_D_${new Date()}`,
     transactionStatus: status,
-    toAccount: fromuserId,
-    fromAccount: touserId,
+    toAccount: touserId,
+    fromAccount: fromuserId,
+    toRemainigBalance,
+    fromRemainingBalance,
     transactionType: type,
     transactionTimestamp: new Date(),
     amount,

@@ -43,6 +43,12 @@ module.exports = {
         notEmpty: true,
       },
     },
+    toRemainigBalance: {
+      type: Sequelize.INTEGER,
+    },
+    fromRemainingBalance: {
+      type: Sequelize.INTEGER,
+    },
     amount: {
       type: Sequelize.INTEGER,
       allowNull: false,

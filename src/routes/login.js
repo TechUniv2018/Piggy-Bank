@@ -10,7 +10,7 @@ function createToken(user) {
     userid: user.userId,
   }, secret.secret, {
     algorithm: 'HS256',
-    expiresIn: '1h',
+    expiresIn: '3h',
   });
 }
 
@@ -29,7 +29,7 @@ const route = [{
       password,
       userName,
     } = request.payload;
-    return Model.bankusers.findOne({
+    Model.bankusers.findOne({
       where: {
         userName,
       },
