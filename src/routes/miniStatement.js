@@ -7,7 +7,7 @@ const headerValidation = require('../validations/header');
 
 module.exports = [
   {
-    method: 'POST',
+    method: 'GET',
     path: '/user/miniStatement',
     config: {
       auth: 'jwt',
