@@ -17,17 +17,15 @@ module.exports = [
       },
     },
     handler: (request, response) => {
-      const { userid } = request.auth.credentials;
-      console.log(userid);
-      Models.accounts.findOne({
+      const userName = request.payload.username;
+      Models.bankusers.findOne({
         where: {
-          userId: userid,
+          userName,
         },
         attributes: ['userName'],
       }).then((result) => {
         if (result === null) {
           const resultObject = { message: 'The username does not exist', status_code: 400 };
-
           return response(resultObject);
         }
         return response({ result });
