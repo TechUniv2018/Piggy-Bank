@@ -1,7 +1,7 @@
 const moveToDashbboard = require('./getDashboard');
 const updateAccountDetails = require('./updateAccountDetails');
-const authenticate = require('./authRequest');
-const verify = require('./verifyRequest');
+// const authenticate = require('./authRequest');
+// const verify = require('./verifyRequest');
 const logout = require('./deleteRequest');
 const editPassword = require('./editPassword');
 const transactionRequest = require('./transaction.js');
@@ -15,6 +15,6 @@ const otpVerify = require('./verifyOTPandToken');
 module.exports = [].concat(
   updateAccountDetails,
   editPassword, moveToDashbboard, transactionRequest,
-  authenticate, verify, logout, transferMoney, signUp,
+  logout, transferMoney, signUp,
   miniStatement, login, getOtp, otpVerify,
 );
