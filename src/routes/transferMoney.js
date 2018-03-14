@@ -24,6 +24,9 @@ module.exports = [
       const userId = request.auth.credentials.userid;
       const { password } = request.payload;
       const { touserId } = request.payload;
+      if (userId === touserId) {
+        response({ message: 'Cannot transfer to your own account', status_code: 404 });
+      }
       Models.bankusers.findOne({
         where: {
           userId,
