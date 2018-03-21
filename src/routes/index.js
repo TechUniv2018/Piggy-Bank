@@ -11,10 +11,13 @@ const miniStatement = require('./miniStatement');
 const login = require('./login');
 const getOtp = require('./getTokenForAadhaar');
 const otpVerify = require('./verifyOTPandToken');
+const getBalance = require('./getBalance');
+const checkUsernameExist = require('./checkUsernameExist');
 
 module.exports = [].concat(
   updateAccountDetails,
   editPassword, moveToDashbboard, transactionRequest,
   logout, transferMoney, signUp,
   miniStatement, login, getOtp, otpVerify,
+  getBalance, checkUsernameExist,
 );
