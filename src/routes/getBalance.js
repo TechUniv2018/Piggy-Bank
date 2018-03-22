@@ -30,8 +30,7 @@ module.exports = [
           return response(resultObject);
         }
         result.currentBalance = balanceResult.currentBalance;
-        // åconsole.log(result);
-        Models.bankusers.findOne({
+        return Models.bankusers.findOne({
           where: {
             userId: userid,
           },
@@ -44,7 +43,6 @@ module.exports = [
           result.userId = kycDetails.userId;
           result.name = kycDetails.name;
           result.userName = kycDetails.userName;
-          // console.log('yfjytguhgkhb', result);
           return response(result);
         }).catch((err) => {
           response(err.message);
