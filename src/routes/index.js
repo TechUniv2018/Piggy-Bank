@@ -15,6 +15,7 @@ const getBalance = require('./getBalance');
 const checkUsernameExist = require('./checkUsernameExist');
 const suggestion = require('./suggestion');
 const forgotPassword = require('./forgotPassword');
+const resetPassword = require('./resetPassword');
 
 module.exports = [].concat(
   updateAccountDetails,
@@ -22,4 +23,5 @@ module.exports = [].concat(
   logout, transferMoney, signUp,
   miniStatement, login, getOtp, otpVerify,
   getBalance, checkUsernameExist, suggestion, forgotPassword,
+  resetPassword,
 );

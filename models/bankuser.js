@@ -71,6 +71,10 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: true,
       },
     },
+    resetCode: {
+      // allowNull: false,
+      type: DataTypes.STRING,
+    },
 
   }, {
     classMethods: {
