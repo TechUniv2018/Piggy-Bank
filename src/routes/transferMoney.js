@@ -4,6 +4,7 @@ const headerValidation = require('./../validations/header');
 const getCurrentBalance = require('./../helpers/getCurrentBalance');
 const enterTransaction = require('./../helpers/enterTransaction');
 const verifyPassword = require('../helpers/verifyPassword');
+const pusher = require('../../Pusher/pusher');
 
 module.exports = [
   {
@@ -55,7 +56,17 @@ module.exports = [
                     const toRemainingBalance = +depositbalance + +amount;
                     const fromRemainingBalance = +withdrawbalance - +amount;
                     enterTransaction(userId, touserId, fromRemainingBalance, toRemainingBalance, amount, 'complete', 'transfer');
-                    response({ message: 'Transfer done', status_code: 201, balance: fromRemainingBalance });
+                    Models.bankusers.findOne({
+                      where: {
+                        userId,
+                      },
+                      attributes: ['name'],
+                    }).then((result) => {
+                      pusher.trigger('transfer-channel', 'transfer-event', {
+                        from: userId, to: touserId, amount, name: result.name,
+                      });
+                      response({ message: 'Transfer done', status_code: 201, balance: fromRemainingBalance });
+                    });
                   }).catch((err) => {
                     enterTransaction(userId, touserId, 0, 0, amount, 'failed', 'transfer');
                     response({ message: err.message, status_code: 500 });
