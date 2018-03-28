@@ -1,7 +1,7 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     queryInterface.addColumn(
-      'users',
+      'bankusers',
       'email',
       Sequelize.STRING,
     );
@@ -13,12 +13,5 @@ module.exports = {
       'email',
       Sequelize.STRING,
     );
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.dropTable('users');
-    */
   },
 };
