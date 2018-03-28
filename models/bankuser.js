@@ -76,6 +76,13 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
     },
 
+    email: {
+      // allowNull: false,
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: true,
+      },
+    },
   }, {
     classMethods: {
       associate() {
