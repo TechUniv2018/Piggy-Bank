@@ -42,8 +42,7 @@ const route = [{
           const gender = KYCResponse.e_Kyc.Poi.Gender;
           const dob = strftime('%F', new Date(KYCResponse.e_Kyc.Poi.Dob));
           const { contact, email } = KYCResponse.e_Kyc.Poi;
-          const address = `${KYCResponse.e_Kyc.Poa.house}${KYCResponse.e_Kyc.Poa.street},
-          ${KYCResponse.e_Kyc.Poa.dist}${KYCResponse.e_Kyc.Poa.pc}${KYCResponse.e_Kyc.Poa.state}`;
+          const address = `${KYCResponse.e_Kyc.Poa.house}, ${KYCResponse.e_Kyc.Poa.street}, ${KYCResponse.e_Kyc.Poa.dist}, ${KYCResponse.e_Kyc.Poa.pc}, ${KYCResponse.e_Kyc.Poa.state}`;
           return generateHash(password, 10).then(hash => Model.bankusers.create({
             userName,
             password: hash,
