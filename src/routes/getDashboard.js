@@ -23,17 +23,14 @@ module.exports = [
             const resultObject = { statusCode: 401, message: 'No such user exists' };
             return response(resultObject);
           }
-          const dob = strftime('%F', new Date(result.dob));
+          const dob = strftime('%F', new Date(result[0].dob));
           const resultObject = {
-            firstName: result.firstName,
-            lastName: result.lastName,
-            address: result.address,
-            phone: result.phoneNumber,
-            email: result.email,
+            name: result[0].name,
+            address: result[0].address,
+            aadharNumber: result[0].aadharNumber,
+            guardian: result[0].guardian,
             dob: `(YYYY/MM/DD) ${dob}`,
-            gender: result.gender,
-            pan: result.panCardNumber,
-            img_src: result.pic,
+            gender: result[0].gender,
           };
           return response({ statusCode: 200, message: 'User details sent', detailsObject: resultObject });
         }).catch((err) => {
