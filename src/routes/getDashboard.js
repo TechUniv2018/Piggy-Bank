@@ -28,9 +28,13 @@ module.exports = [
             name: result[0].name,
             address: result[0].address,
             aadharNumber: result[0].aadharNumber,
-            guardian: result[0].guardian,
+            guardian: result[0].co,
             dob: `(YYYY/MM/DD) ${dob}`,
             gender: result[0].gender,
+            email: result[0].email,
+            contact: result[0].contact,
+            accountOpen: strftime('%F', new Date(result[0].createdAt)),
+            lastTransaction: strftime('%F', new Date(result[0].updatedAt)),
           };
           return response({ statusCode: 200, message: 'User details sent', detailsObject: resultObject });
         }).catch((err) => {
